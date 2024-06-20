@@ -7,7 +7,6 @@ import { CiFlag1 } from "react-icons/ci";
 
 
 const turnto: React.FC = () => {
-
     const items: { id: number; title: string, subtitle: string, location: string, time: string, price: string, day: string, direction: string, min: string, content: string, login: string }[] = [
         {
             id: 1,
