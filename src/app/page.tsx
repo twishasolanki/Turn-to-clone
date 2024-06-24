@@ -1,13 +1,12 @@
 import React from 'react';
 import Sidebar from '@/app/components/Sidebar';
 import Turnto from '@/app/components/Turnto/page';
-import Map from '@/app/components/Map';
 
 const Home: React.FC = () => {
   return (
     <>
-      {/* <div
-        className="flex w-full "
+      <div
+        className="flex w-screen "
         style={{
           backgroundImage: "url('./assets/MAP.png')",
           backgroundSize: 'cover',
@@ -16,9 +15,7 @@ const Home: React.FC = () => {
       >
         <Sidebar />
         <Turnto />
-      </div> */}
-
-      <Map/>
+      </div>
     </>
   );
 };
