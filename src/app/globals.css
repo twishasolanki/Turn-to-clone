@@ -22,3 +22,7 @@
     text-wrap: balance;
   }
 }
+
+.scrollhide::-webkit-scrollbar{
+  display: none;
+}

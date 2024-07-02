@@ -9,16 +9,27 @@ import { MdOutlineMenu } from "react-icons/md";
 import { GrDirections } from "react-icons/gr";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaSearch } from "react-icons/fa";
-import {CiShare2} from "react-icons/ci"
+import { CiShare2, CiFlag1 } from "react-icons/ci"
 import { FaRegBookmark } from "react-icons/fa";
-import { CiFlag1 } from "react-icons/ci";
-import {MdBlockFlipped} from "react-icons/md";
-import Map from '../Map';
-import Sidebar from '../Sidebar';
+import { MdBlockFlipped } from "react-icons/md";
+import Map from '@/app/components/Map';
 import { RWebShare } from "react-web-share";
 import { IoMdShare } from "react-icons/io";
 import { title } from 'process';
 import Typewriter from 'typewriter-effect';
+import { useDrag } from '@use-gesture/react';
+import { animated, useSpring } from 'react-spring';
+import { IoIosArrowDown } from "react-icons/io";
+import 'react-modern-drawer/dist/index.css'
+import SidebarContent from '../SidebarContent';
+import { GrMapLocation } from "react-icons/gr";
+import { TbWorldSearch } from "react-icons/tb";
+import { MdOutlineDashboard } from 'react-icons/md';
+import { CiSettings } from 'react-icons/ci';
+import { GrUserSettings } from "react-icons/gr";
+import { MdLogout } from "react-icons/md";
+import ProfileCard from '@/app/components/ProfileCard';
+import SmallProfileCard from '../SmallProfileCard';
 
 interface ShareButtonProps {
     title: string;
@@ -41,25 +52,45 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
             content: 'Turn-To AI Profile Match',
             login: 'Login To See Profile Matching'
         },
-        {
-            id: 2,
-            title: 'Marketing Consultant',
-            subtitle: 'Tailwind CSS Solution',
-            location: 'Rajkot,360001',
-            time: 'Part-Time',
-            price: '1000-20000',
-            day: '18 d ago',
-            direction: '~3 - 4 Mi',
-            min: '~5min',
-            content: 'Turn-To AI Profile Match',
-            login: 'Login To See Profile Matching'
-        }
+
     ];
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [selecteditem, setSelectedItem] = useState<boolean>(false);
     const [activePopupId, setActivePopupId] = useState<number | null>(null);
+    const [isOpendrawer, setIsOpenDrawer] = useState<boolean>(false);
+    const [{ y }, api] = useSpring(() => ({ y: window.innerHeight }));
 
+    const openDrawer = () => {
+        setIsOpenDrawer(true);
+        api.start({ y: 0 });
+    };
+
+    const closeDrawer = () => {
+        setIsOpenDrawer(false);
+        api.start({ y: window.innerHeight });
+    };
+
+    const bind = useDrag(({ last, movement: [, my], memo = y.get() }) => {
+        if (last) {
+            if (my < -50) openDrawer();
+            else closeDrawer();
+            return memo;
+        } else {
+            api.start({ y: my + memo, immediate: true });
+            return memo;
+        }
+    });
+
+    const [isOpenmenu, setIsOpenmenu] = useState(false);
+
+    const toggleDrawer = () => {
+        setIsOpenmenu(!isOpenmenu);
+    };
+
+    const closemenu = () => {
+        setIsOpenmenu(false);
+    };
     const togglePopup = (id: number) => {
         if (activePopupId === id) {
             setIsOpen(false);
@@ -89,19 +120,52 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
         };
     }, [isOpen]);
 
+    interface MenuItem {
+        icons: React.ReactNode;
+        label: string;
+    }
+
+    const menuItems: MenuItem[] = [
+        {
+            icons: <GrMapLocation size={30} />,
+            label: 'Job Map'
+        },
+        {
+            icons: <TbWorldSearch size={30} />,
+            label: 'Explorer'
+        },
+        {
+            icons: <MdOutlineDashboard size={30} />,
+            label: 'Job Management'
+        },
+        {
+            icons: <CiSettings size={30} />,
+            label: 'Resources'
+        },
+        {
+            icons: <GrUserSettings size={30} />,
+            label: 'Account Settings'
+        },
+        {
+            icons: <MdLogout size={30} />,
+            label: 'Log Out'
+        },
+    ];
+    const [open, setOpen] = useState(true);
+
     return (
         <>
-            <div>
-                <div className="p-4 md:flex md:flex-row flex-col md:w-full justify-center items-center  w-screen">
-                    <form className="flex items-center md:max-w-lg">
+            <div >
+                <div className="p-1 md:flex md:flex-row flex-col md:w-full justify-center items-center w-screen md:mt-0 mt-1">
+                    <div className="flex items-center md:max-w-lg md:ms-4 ms-5 md:me-0 me-5">
                         <div className="relative w-full">
                             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                <img src='./assets/TurnTo.png' className='h-7 w-7' />
-                                <div>
+                                <img src='./assets/TurnTo.png' className='h-5 w-5' />
+                                <div className='md:text-md text-sm'>
                                     <Typewriter
                                         onInit={(typewriter) => {
                                             typewriter
-                                                .typeString('Travel Nurse Opportunitie')
+                                                .typeString('Travel Nurse Opportunities')
                                                 .pauseFor(2500)
                                                 .deleteAll()
                                                 .typeString('School Psychologist Position')
@@ -110,7 +174,7 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
                                                 .typeString('Direct Care Work Position')
                                                 .pauseFor(2500)
                                                 .deleteAll()
-                                                .typeString('Hair Styleist Jobs')     
+                                                .typeString('Hair Styleist Jobs')
                                                 .pauseFor(2500)
                                                 .deleteAll()
                                                 .typeString('Roofing Manager Creers')
@@ -119,118 +183,106 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
                                                 .typeString('Field Data Collector Jobs')
                                                 .pauseFor(2500)
                                                 .deleteAll()
-                                                .start();        
+                                                .start();
                                         }}
                                     />
                                 </div>
                             </div>
                             <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-24 p-2.5" />
                         </div>
-                        <a href="/Sidebar"> <button type="submit" className=" items-center py-3 px-3 text-sm font-medium bg-white rounded-md right-r-xl md:hidden block">
-                           <MdOutlineMenu />
-                        </button></a>
-                    </form>
-                    <form className="flex items-center md:max-w-lg md:mt-0 mt-1 ">
-                        <div className="relative w-full">
-                            <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                <FaSearch className="w-4 h-4 text-gray-500" />
+                        <button
+                            onClick={toggleDrawer}
+                            className="items-center py-3 px-3 text-sm font-medium bg-white rounded-md right-r-xl md:hidden block"
+                        >
+                            <MdOutlineMenu />
+                        </button>
+                    </div>
+                    <div className="flex md:hidden block absolute h-screen md:ms-0 ms-5 md:me-0 me-5">
+                        {isOpenmenu && (
+                            <div
+                                className="fixed inset-0 bg-black bg-opacity-50"
+                                onClick={closemenu}
+                            />
+                        )}
+                        <div
+                            className={`md:hidden block fixed top-0 right-0 bottom-0 w-64 bg-white shadow-lg transition-transform transform ${isOpenmenu ? 'translate-x-0' : 'translate-x-full'}`}
+                        >
+                            <div className="p-8">
+                                <SidebarContent menuItems={menuItems} open={open} />
+                                <img src='./assets/logo.png' alt="Logo" className="mt-64" />
                             </div>
-                            <input type="text" id="voice-search" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="Search Mockups, Logos, Design Templates..." required />
+                        </div>
+                    </div>
+                    <form className="flex items-center md:max-w-lg md:mt-0 mt-1  md:ms-0 ms-6 md:me-0 me-5">
+                        <div className=" w-full">
+                            <input type="text" id="voice-search" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full ps- p-2.5" placeholder="Search Mockups, Logos, Design Templates..." required />
                         </div>
                         <button type="submit" className="inline-flex items-center py-2.5 px-3 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
                             <FaSearch />
                         </button>
                     </form>
                 </div>
-                <div className='flex mx-auto md:justify-start md:items-start justify-center items-center ms-5'>
-                    <button type="button" className="text-white bg-blue-700 font-medium rounded-lg md:text-md text-sm px-4 py-2 mb-2 focus:outline-none">last 15 days</button>
-                    <button type="button" className="text-white ms-3 bg-blue-700 font-medium rounded-lg md:text-md text-sm px-4 py-2 mb-2 focus:outline-none">within 20 miles</button>
-                    <button type="button" className="text-black ms-3 bg-gray-100 font-medium rounded-lg md:text-md text-sm px-4 py-2 mb-2 focus:outline-none">Job Type</button>
+                <div className='flex md:mx-5 md:me-0 me-5 md:ms-5 ms-5 md:mt-0 mt-1 md:justify-start md:items-start justify-center items-center '>
+                    <button type="button" className="md:w-32 w-1/2 text-white bg-blue-700 font-medium rounded-lg md:text-md text-sm md:px-5  px-2 py-3 p-1 md:py-2 mb-1 focus:outline-none">last 15 days</button>
+                    <button type="button" className="md:w-36 w-1/2 text-white ms-3 bg-blue-700 font-medium rounded-lg md:text-md text-sm md:px-0 sm:px-14 px-2 py-3  p-1 md:py-2 mb-1 focus:outline-none">within 20 miles</button>
+                    <button type="button" className="text-black ms-3 bg-gray-100 font-medium rounded-lg md:text-md text-sm md:px-4 p-1 py-2 mb-1 focus:outline-none md:block hidden">Job Type</button>
                 </div>
                 <div className='ms-5'>
-                    <button type="button" className="md:block hidden text-black bg-gray-100 rounded-lg md:text-md text-sm px-4 py-2 mb-2 font-bold">Latest Job</button>
+                    <button type="button" className="md:block hidden text-black bg-gray-100 rounded-lg md:text-md text-sm px-2 py-2 mb-1 font-bold">Latest Job</button>
                 </div>
-                <div className='md:ms-0  md:mt-0 mt-64'>
-                    <div className="mt-5  pl-4 pr-4 md:h-[calc(75vh-20px)] h-[calc(78vh-20px)] md:overflow-y-scroll">
-                        {items.map((item) => (
-                            <div key={item.id} className={selecteditem ? `hidden ` : `block max-w-lg p-2 mt-3 bg-white border border-blue-200 rounded-lg shadow`} >
-                                <div className="flex md:flex-row flex-col">
-                                    <div className="md:w-1/2" onClick={() => setSelectedItem(true)}>
-                                        <p className="font-bold md:text-xl text-md">{item.title}</p>
-                                    </div>
-                                    <div className="md:w-1/2 flex justify-end relative">
-                                        <button onClick={() => togglePopup(item.id)} className="text-gray-500 focus:outline-none">
-                                            <BsThreeDotsVertical />
-                                        </button>
-                                    </div>
-                                    {isOpen && activePopupId === item.id && (
-                                        <div id="popupMenu" className="absolute md:right-[57%] right-[10%] mt-2 w-58 py-2 bg-white border border-gray-200 rounded-lg shadow-xl z-10">
-                                            <a href="#" className="flex px-4 py-2 text-gray-800 hover:bg-gray-100 "><CiShare2 className='mt-1' /><span className='ms-2'>Share This Job</span></a>
-                                            <a href="#" className="flex px-4 py-2 text-gray-800 hover:bg-gray-100"><ImNewTab className='mt-1' /><span className='ms-2'>Open In New Tab</span></a>
-                                            <a href="#" className="flex px-4 py-2 text-gray-800 hover:bg-gray-100"><MdBlockFlipped className='mt-1' /><span className='ms-2'>Not Intrested</span></a>
-                                            <a href="#" className="flex px-4 py-2 text-gray-800 hover:bg-gray-100"><CiFlag1 className='mt-1' /><span className='ms-2'>Problem With This Job?</span></a>
-                                        </div>
-                                    )}
-                                </div>
-                                <div className="flex">
-                                    <div className="md:w-1/2">
-                                        <p className="text-blue-400 md:text-lg text-sm">{item.subtitle}</p>
-                                    </div>
-                                    <div className="md:w-1/2 flex justify-end items-end">
-                                        <FaRegBookmark />
-                                    </div>
-                                </div>
-                                <div className="flex mt-1">
-                                    <div className="md:w-1/4 flex">
-                                        <IoLocationOutline />
-                                        <p className="ms-1 text-sm">{item.location}</p>
-                                    </div>
-                                    <div className="md:w-1/4 flex ms-5">
-                                        <FaRegClock />
-                                        <p className="ms-1 text-sm">{item.time}</p>
-                                    </div>
-                                    <div className="md:w-1/4 flex">
-                                        <LuDollarSign />
-                                        <p className="text-sm">{item.price}</p>
-                                    </div>
-                                    <div className="md:w-1/4 flex">
-                                        <CiCalendar />
-                                        <p className="ms-1 text-sm">{item.day}</p>
-                                    </div>
-                                </div>
-                                <div className="flex mt-2">
-                                    <div className="md:w-28 flex">
-                                        <GrDirections />
-                                        <p className="ms-1 text-sm">{item.direction}</p>
-                                    </div>
-                                    <div className="md:w-1/2 ms-5 flex">
-                                        <FaRegClock />
-                                        <p className="ms-1 text-sm">{item.min}</p>
-                                    </div>
-                                </div>
-                                <div className="md:text-lg text-xs font-bold mt-2 underline">{item.content}</div>
-                                <div className="text-blue-400 md:text-lg text-xs font-medium">{item.login}</div>
+                <div className='card-body md:mt-0 mt-1 bg-white md:w-[56%] w-[90%] ms-5 p-2 rounded-md md:me-0 me-5'>
+                    <p className='text-gray-500 md:text-md text-sm'>2/2 Jobs in 360001, Rajkot, Gujarat, India</p>
+                </div>
+                <div className="flex mt-44 justify-center items-center md:hidden block  ">
+                    <div className="relative md:h-screen h-[280px] overflow-hidden md:hidden block ">
+                        <animated.div
+                            className="fixed bottom-0 left-0 w-full bg-white shadow-lg"
+                            style={{ y, height: '100vh' }}
+                        >
+                            <div className="flex justify-center p-4 bg-gray-300 text-white">
+                                <button onClick={closeDrawer}><IoIosArrowDown className='text-black font-bold' /></button>
                             </div>
-                        ))}
-                        {selecteditem && (
-                            <>
-                                <Map />
-                            </>
-                        )}
+                            <SmallProfileCard />
+                        </animated.div>
+                        <animated.div
+                            className={`${isOpendrawer ? 'hidden' : 'block'} fixed bottom-0 left-0 w-full flex justify-center p-4 bg-gray-300 text-black font-bold `}
+                            {...bind()}
+                            style={{ y: isOpendrawer ? - 40 : 0 }}
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-6 w-6"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M5 15l7-7 7 7"
+                                />
+                            </svg>
+                        </animated.div>
                     </div>
                 </div>
+                <div className='md:block hidden'>
+                <ProfileCard />
+                </div>
+                
             </div>
+
             <RWebShare
                 data={{
                     text: text, title: title, url: url,
                 }}>
-                <div className='flex justify-start items-start'>
+                <div className='flex justify-start items-start md:block hidden mt-auto '>
                     <button className='bg-gray-100 shadow-xl shadow-black rounded-md px-5 py-5 mt-auto ms-5 card-body flex'><IoMdShare /></button>
                 </div>
             </RWebShare>
+            {/* <div className='bg-blue-800 text-white text-md h-6 mt-5 rounded-md px-7 font-bold py-5 md:hidden block '>JobList</div> */}
         </>
     );
 };
 
-export default TurnTo;
-
+export default TurnTo;  

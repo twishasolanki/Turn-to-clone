@@ -18,7 +18,7 @@ const config: Config = {
       'xs':'296px',
       'sm': '640px',
       // => @media (min-width: 640px) { ... }
-
+      'xm':'389px',
       'md': '768px',
       // => @media (min-width: 768px) { ... }
 
