@@ -1,35 +1,25 @@
 'use client'
-import React, { useState, useEffect } from 'react';
-import { IoLocationOutline } from "react-icons/io5";
-import { ImNewTab } from "react-icons/im";
-import { FaRegClock } from "react-icons/fa";
-import { LuDollarSign } from "react-icons/lu";
-import { CiCalendar } from "react-icons/ci";
-import { MdOutlineMenu } from "react-icons/md";
-import { GrDirections } from "react-icons/gr";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { FaSearch } from "react-icons/fa";
-import { CiShare2, CiFlag1 } from "react-icons/ci"
-import { FaRegBookmark } from "react-icons/fa";
-import { MdBlockFlipped } from "react-icons/md";
-import Map from '@/app/components/Map';
-import { RWebShare } from "react-web-share";
-import { IoMdShare } from "react-icons/io";
-import { title } from 'process';
-import Typewriter from 'typewriter-effect';
-import { useDrag } from '@use-gesture/react';
-import { animated, useSpring } from 'react-spring';
-import { IoIosArrowDown } from "react-icons/io";
-import 'react-modern-drawer/dist/index.css'
-import SidebarContent from '../SidebarContent';
-import { GrMapLocation } from "react-icons/gr";
-import { TbWorldSearch } from "react-icons/tb";
-import { MdOutlineDashboard } from 'react-icons/md';
-import { CiSettings } from 'react-icons/ci';
-import { GrUserSettings } from "react-icons/gr";
-import { MdLogout } from "react-icons/md";
+import { Drawer } from "vaul";
+import { clsx } from "clsx";
 import ProfileCard from '@/app/components/ProfileCard';
+import { useDrag } from '@use-gesture/react';
+import { title } from 'process';
+import React, { useEffect, useState } from 'react';
+import { CiSettings } from 'react-icons/ci';
+import { FaSearch } from "react-icons/fa";
+import { GrMapLocation, GrUserSettings } from "react-icons/gr";
+import { IoIosArrowDown, IoMdShare } from "react-icons/io";
+import { MdLogout, MdOutlineDashboard, MdOutlineMenu } from "react-icons/md";
+import { TbWorldSearch } from "react-icons/tb";
+import 'react-modern-drawer/dist/index.css';
+import { animated, useSpring } from 'react-spring';
+import { RWebShare } from "react-web-share";
+import Typewriter from 'typewriter-effect';
+import SidebarContent from '../SidebarContent';
 import SmallProfileCard from '../SmallProfileCard';
+import { IoIosArrowUp } from "react-icons/io";
+
+
 
 interface ShareButtonProps {
     title: string;
@@ -52,7 +42,6 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
             content: 'Turn-To AI Profile Match',
             login: 'Login To See Profile Matching'
         },
-
     ];
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -83,7 +72,7 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
     });
 
     const [isOpenmenu, setIsOpenmenu] = useState(false);
-
+    const [snap, setSnap] = useState<number | string | null>("148px");
     const toggleDrawer = () => {
         setIsOpenmenu(!isOpenmenu);
     };
@@ -233,9 +222,9 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
                 <div className='card-body md:mt-0 mt-1 bg-white md:w-[56%] w-[90%] ms-5 p-2 rounded-md md:me-0 me-5'>
                     <p className='text-gray-500 md:text-md text-sm'>2/2 Jobs in 360001, Rajkot, Gujarat, India</p>
                 </div>
-                <div className="flex mt-44 justify-center items-center md:hidden block  ">
+                <div className="flex mt-[38%] justify-center items-center md:hidden block  ">
                     <div className="relative md:h-screen h-[280px] overflow-hidden md:hidden block ">
-                        <animated.div
+                        {/* <animated.div
                             className="fixed bottom-0 left-0 w-full bg-white shadow-lg"
                             style={{ y, height: '100vh' }}
                         >
@@ -263,15 +252,41 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
                                     d="M5 15l7-7 7 7"
                                 />
                             </svg>
-                        </animated.div>
+                        </animated.div> */}
                     </div>
                 </div>
+                <Drawer.Root
+                    snapPoints={["148px", "355px", 1]}
+                    activeSnapPoint={snap}
+                    setActiveSnapPoint={setSnap}
+                >
+                    <Drawer.Trigger asChild>
+                            <button className="bg-gray-300 w-full text-center md:hidden block p-5 font-bold">
+                                <div className="flex justify-center items-center">
+                                    <IoIosArrowUp className="h-5 w-10 " />
+                                </div>
+                            </button>
+                    </Drawer.Trigger>
+                    <Drawer.Overlay className="fixed inset-0 bg-black/40" />
+                    <Drawer.Portal>
+                        <Drawer.Content className="fixed flex flex-col bg-white border border-gray-200 border-b-none rounded-t-[10px] bottom-0 left-0 right-0 h-full max-h-[97%] mx-[-1px]">
+                            <div
+                                className={clsx("flex flex-col max-w-2xl mx-auto w-full p-4 pt-1 justify-center items-center", {
+                                    "overflow-hidden": snap === 1,
+                                    "overflow-hidden": snap !== 1,
+                                })}
+                            >
+                                <div className="">
+                                    <SmallProfileCard />
+                                </div>
+                            </div>
+                        </Drawer.Content>
+                    </Drawer.Portal>
+                </Drawer.Root>
                 <div className='md:block hidden'>
-                <ProfileCard />
+                    <ProfileCard />
                 </div>
-                
             </div>
-
             <RWebShare
                 data={{
                     text: text, title: title, url: url,
