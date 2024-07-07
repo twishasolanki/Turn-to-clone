@@ -131,12 +131,14 @@ const SmallProfileCard: React.FC = () => {
     }
 
     return (
-        <div>
+        <>
+        <div className='flex w-screen justify-center items-center '>
             <div className='md:ms-0 md:mt-0 text-sm'>
-                <div className="mt-3 pl-4 pr-4 md:h-[calc(75vh-20px)] h-[calc(80vh-50vh)] md:overflow-y-scroll">
+                <div className="mt-3 w-full md:h-[calc(75vh-20px)] h-[calc(80vh-50vh)] md:overflow-y-scroll ">
                     {items.map((item) => (
-                        <div key={item.id} className="block max-w-lg p-2 mt-3 bg-white border border-blue-200 rounded-lg shadow">
+                        <div key={item.id} className="block p-2 mt-3 bg-white border border-blue-200 rounded-lg shadow">
                             <div className="flex md:flex-row flex-col">
+                                
                                 <div className="md:w-1/2" onClick={() => setSelectedItem(item.id)}>
                                     <p className="font-bold md:text-md text-md ">{item.title}</p>
                                 </div>
@@ -155,8 +157,8 @@ const SmallProfileCard: React.FC = () => {
                                 )}
                             </div>
                             <div className="flex">
-                                <div className="md:w-1/2">
-                                    <p className="text-blue-400 md:text-md text-xs">{item.subtitle}</p>
+                                <div className="md:w-1/2 md:text-md text-xs">
+                                    <p className="text-blue-400 ">{item.subtitle}</p>
                                 </div>
                                 <div className="md:w-1/2 w-full flex justify-end items-end">
                                     <FaRegBookmark />
@@ -167,26 +169,25 @@ const SmallProfileCard: React.FC = () => {
                                     <IoLocationOutline />
                                     <p className="ms-1 text-xs">{item.location}</p>
                                 </div>
-                                <div className="md:w-1/4 flex ms-5">
+                                <div className="md:w-1/4 flex ms-3">
                                     <FaRegClock />
                                     <p className="ms-1 text-xs">{item.time}</p>
                                 </div>
-                                <div className="md:w-1/4 flex md:ms-0 ms-5">
+                                <div className="md:w-1/4 flex md:ms-0 ms-3">
                                     <LuDollarSign />
                                     <p className="text-xs">{item.price}</p>
-                                </div>
-                                <div className="md:w-1/4 flex md:ms-0 ms-5 ">
+                                </div>                             
+                            </div>
+                            <div className="flex mt-2">
+                            <div className="md:w-1/4 flex ms-0 ">
                                     <CiCalendar />
                                     <p className="ms-1 text-xs">{item.day}</p>
                                 </div>
-                            </div>
-                            <div className="flex mt-2">
-                           
                                 <div className="md:w-28 ms-3 flex">
                                     <GrDirections />
                                     <p className="ms-1 text-xs">{item.direction}</p>
                                 </div>
-                                <div className="md:w-1/2 ms-5 flex">
+                                <div className="md:w-1/2 ms-3 flex">
                                     <FaRegClock />
                                     <p className="ms-1 text-xs">{item.min}</p>
                                 </div>
@@ -198,6 +199,7 @@ const SmallProfileCard: React.FC = () => {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 

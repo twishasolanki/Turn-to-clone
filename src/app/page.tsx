@@ -6,7 +6,7 @@ const Home: React.FC = () => {
   return (
     <>
       <div
-        className="flex md:w-screen w-screen h-full"
+        className="flex md:max-w-screen w-full md:max-h-screen h-screen"
         style={{
           backgroundImage: "url('./assets/MAP.png')",
           backgroundSize: 'cover',
@@ -16,7 +16,6 @@ const Home: React.FC = () => {
       <div className='flex'>           
         <Sidebar />
         <TurnTo />
-       
       </div>
      </div>
     </>

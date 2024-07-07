@@ -16,7 +16,6 @@
   }
 }
 
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -26,3 +25,25 @@
 .scrollhide::-webkit-scrollbar{
   display: none;
 }
+
+.scrollable-element {
+  scrollbar-width: thin;
+}
+
+.scrollable-element::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.scrollable-element::-webkit-scrollbar-track {
+  background: #e0f7fa; /* Background color of the scrollbar track */
+}
+
+.scrollable-element::-webkit-scrollbar-thumb {
+  background-color: #0277bd; /* Blue color of the scrollbar thumb */
+  border-radius: 10px; /* Roundness of the scrollbar thumb */
+}
+
+.scrollable-element::-webkit-scrollbar-thumb:hover {
+  background-color: #01579b; /* Darker blue color when hovering over the scrollbar thumb */
+}
+

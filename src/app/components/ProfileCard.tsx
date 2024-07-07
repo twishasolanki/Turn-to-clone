@@ -65,6 +65,32 @@ const ProfileCard: React.FC = () => {
             content: 'Turn-To AI Profile Match',
             login: 'Login To See Profile Matching'
         },
+        {
+            id: 5,
+            title: 'Marketing Consultant',
+            subtitle: 'Tailwind CSS Solution',
+            location: 'Rajkot,360001',
+            time: 'Part-Time',
+            price: '1000-20000',
+            day: '18 d ago',
+            direction: '~3 - 4 Mi',
+            min: '~5min',
+            content: 'Turn-To AI Profile Match',
+            login: 'Login To See Profile Matching'
+        },
+        {
+            id: 6,
+            title: 'Marketing Consultant',
+            subtitle: 'Tailwind CSS Solution',
+            location: 'Rajkot,360001',
+            time: 'Part-Time',
+            price: '1000-20000',
+            day: '18 d ago',
+            direction: '~3 - 4 Mi',
+            min: '~5min',
+            content: 'Turn-To AI Profile Match',
+            login: 'Login To See Profile Matching'
+        },
     ];
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -107,7 +133,7 @@ const ProfileCard: React.FC = () => {
     return (
         <div>
             <div className='md:ms-0 md:mt-0 text-sm'>
-                <div className="mt-3 pl-4 pr-4 md:h-[calc(75vh-20px)] h-[calc(80vh-50vh)] md:overflow-y-scroll">
+                <div className="mt-3 pl-4 pr-4 md:h-[calc(80vh-20px)] h-[calc(80vh-50vh)] md:overflow-y-scroll scrollable-element">
                     {items.map((item) => (
                         <div key={item.id} className="block max-w-lg p-2 mt-3 bg-white border border-blue-200 rounded-lg shadow">
                             <div className="flex md:flex-row flex-col">
@@ -120,11 +146,13 @@ const ProfileCard: React.FC = () => {
                                     </button>
                                 </div>
                                 {isOpen && activePopupId === item.id && (
-                                    <div id="popupMenu" className="absolute md:right-[57%] right-[10%] mt-2 w-58 py-2 bg-white border border-gray-200 rounded-lg shadow-xl z-10 text-sm">
-                                        <a href="#" className="flex px-4 py-2 text-gray-800 hover:bg-gray-100 "><CiShare2 className='mt-1' /><span className='ms-2'>Share This Job</span></a>
-                                        <a href="#" className="flex px-4 py-2 text-gray-800 hover:bg-gray-100"><ImNewTab className='mt-1' /><span className='ms-2'>Open In New Tab</span></a>
-                                        <a href="#" className="flex px-4 py-2 text-gray-800 hover:bg-gray-100"><MdBlockFlipped className='mt-1' /><span className='ms-2'>Not Interested</span></a>
-                                        <a href="#" className="flex px-4 py-2 text-gray-800 hover:bg-gray-100"><CiFlag1 className='mt-1' /><span className='ms-2'>Problem With This Job?</span></a>
+                                    <div className='flex justify-end items-end'>
+                                        <div id="popupMenu" className="absolute  mt-2 w-58 py-2 bg-white border border-gray-200 rounded-lg shadow-xl z-10 text-sm">
+                                            <a href="#" className="flex px-4 py-2 text-gray-800 hover:bg-gray-100 "><CiShare2 className='mt-1' /><span className='ms-2'>Share This Job</span></a>
+                                            <a href="#" className="flex px-4 py-2 text-gray-800 hover:bg-gray-100"><ImNewTab className='mt-1' /><span className='ms-2'>Open In New Tab</span></a>
+                                            <a href="#" className="flex px-4 py-2 text-gray-800 hover:bg-gray-100"><MdBlockFlipped className='mt-1' /><span className='ms-2'>Not Interested</span></a>
+                                            <a href="#" className="flex px-4 py-2 text-gray-800 hover:bg-gray-100"><CiFlag1 className='mt-1' /><span className='ms-2'>Problem With This Job?</span></a>
+                                        </div>
                                     </div>
                                 )}
                             </div>
@@ -155,7 +183,6 @@ const ProfileCard: React.FC = () => {
                                 </div>
                             </div>
                             <div className="flex mt-2">
-                           
                                 <div className="md:w-28 ms-3 flex">
                                     <GrDirections />
                                     <p className="ms-1 text-xs">{item.direction}</p>
