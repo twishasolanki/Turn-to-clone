@@ -1,23 +1,26 @@
 import React from 'react';
 import Sidebar from '@/app/components/Sidebar';
 import TurnTo from '@/app/components/Turnto/page';
+import ButtonScroll from './components/ButtonScroll';
 
 const Home: React.FC = () => {
   return (
     <>
       <div
-        className="flex md:max-w-screen w-full md:max-h-screen h-screen"
+        className="flex md:max-w-screen w-full md:max-h-screen h-screen bg-fixed"
         style={{
           backgroundImage: "url('./assets/MAP.png')",
           backgroundSize: 'cover',
            backgroundPosition: 'center',
         }}
       >
-      <div className='flex'>           
+      <div className='flex fixed'>           
         <Sidebar />
         <TurnTo />
       </div>
+  
      </div>
+   
     </>
   );
 };

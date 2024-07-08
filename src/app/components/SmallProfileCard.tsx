@@ -136,9 +136,8 @@ const SmallProfileCard: React.FC = () => {
             <div className='md:ms-0 md:mt-0 text-sm'>
                 <div className="mt-3 w-full md:h-[calc(75vh-20px)] h-[calc(80vh-50vh)] md:overflow-y-scroll ">
                     {items.map((item) => (
-                        <div key={item.id} className="block p-2 mt-3 bg-white border border-blue-200 rounded-lg shadow">
-                            <div className="flex md:flex-row flex-col">
-                                
+                        <div key={item.id} className="block p-1 mt-3 bg-white border border-blue-200 rounded-lg shadow">
+                            <div className="flex md:flex-row flex-col">                             
                                 <div className="md:w-1/2" onClick={() => setSelectedItem(item.id)}>
                                     <p className="font-bold md:text-md text-md ">{item.title}</p>
                                 </div>

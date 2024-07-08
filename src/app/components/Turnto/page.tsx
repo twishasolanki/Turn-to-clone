@@ -1,28 +1,24 @@
 'use client'
+import Map from '@/app/components/Map';
 import ProfileCard from '@/app/components/ProfileCard';
-import { useDrag } from '@use-gesture/react';
 import { clsx } from "clsx";
 import { title } from 'process';
 import React, { useEffect, useState } from 'react';
+import { BsThreeDotsVertical } from 'react-icons/bs';
 import { CiCalendar, CiFlag1, CiSettings, CiShare2 } from 'react-icons/ci';
+import { FaRegBookmark, FaRegClock } from 'react-icons/fa';
 import { GrDirections, GrMapLocation, GrUserSettings } from "react-icons/gr";
-import { IoIosArrowDown, IoIosArrowUp, IoMdShare } from "react-icons/io";
+import { ImNewTab } from 'react-icons/im';
+import { IoIosArrowDown, IoMdShare } from "react-icons/io";
+import { IoLocationOutline } from 'react-icons/io5';
+import { LuDollarSign } from 'react-icons/lu';
 import { MdBlockFlipped, MdLogout, MdOutlineDashboard, MdOutlineMenu } from "react-icons/md";
 import { TbWorldSearch } from "react-icons/tb";
 import 'react-modern-drawer/dist/index.css';
-import { useSpring } from 'react-spring';
 import { RWebShare } from "react-web-share";
 import Typewriter from 'typewriter-effect';
 import { Drawer } from "vaul";
 import SidebarContent from '../SidebarContent';
-import SmallProfileCard from '../SmallProfileCard';
-import { BsThreeDotsVertical } from 'react-icons/bs';
-import { FaRegBookmark, FaRegClock } from 'react-icons/fa';
-import { IoLocationOutline } from 'react-icons/io5';
-import { LuDollarSign } from 'react-icons/lu';
-import Map from '@/app/components/Map';
-import { ImNewTab } from 'react-icons/im';
-import { log } from 'console';
 
 interface ShareButtonProps {
     title: string;
@@ -33,36 +29,13 @@ interface ShareButtonProps {
 const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [selecteditem, setSelectedItem] = useState<boolean>(false);
     const [activePopupId, setActivePopupId] = useState<number | null>(null);
-    const [isOpendrawer, setIsOpenDrawer] = useState<boolean>(false);
-    const [{ y }, api] = useSpring(() => ({ y: window.innerHeight }));
     const [isOpenmenu, setIsOpenmenu] = useState(false);
     const [snap, setSnap] = useState<number | string | null>("148px");
     const [selectedItemcard, setSelectedItemcard] = useState<number | null>(null);
     const [open, setOpen] = useState(true);
 
-    const openDrawer = () => {
-        setIsOpenDrawer(true);
-        api.start({ y: 0 });
-    };
-
-    const closeDrawer = () => {
-        setIsOpenDrawer(false);
-        api.start({ y: window.innerHeight });
-    };
-
-    const bind = useDrag(({ last, movement: [, my], memo = y.get() }) => {
-        if (last) {
-            if (my < -50) openDrawer();
-            else closeDrawer();
-            return memo;
-        } else {
-            api.start({ y: my + memo, immediate: true });
-            return memo;
-        }
-    });
-
+   
     const toggleDrawer = () => {
         setIsOpenmenu(!isOpenmenu);
     };
@@ -261,12 +234,12 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
                         </div>
                     </div>
                     <form className="max-w-2xl mx-auto md:max-w-5xl flex items-center md:mt-0 mt-1 md:ms-0 ms-6 md:me-0 me-8">
-                        <div className="flex md:w-60 w-full">
+                        <div className="flex md:w-64 w-full">
                             <div className="relative w-full">
                                 <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                                     <IoLocationOutline className='bg-gray-50' />
                                 </div>
-                                <input type="search" id="default-search" className="block w-full p-1.5 ps-8 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 " placeholder="Search Mockups, Logos..." required />
+                                <input type="search" id="default-search" className="block w-full md:p-2.5 p-1.5 ps-8 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50  " placeholder="360001, Rajkot, Gujrat, India" required />
                                 <button type="submit" className="absolute top-0 end-0 p-3 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg  ">
                                     <svg className="w-4 md:h-4 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
@@ -300,7 +273,9 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
                     <button className="w-1/3 bg-blue-700 ms-3 py-2 rounded-lg text-white md:text-sm text-xs">last 15 days</button>
                     <button className="w-1/3 bg-blue-700 ms-3 rounded-lg text-white md:text-sm text-xs">within 20 miles</button>
                     <button className="w-1/3 bg-gray-100 ms-3 rounded-lg font-bold md:text-sm text-xs">Job Type</button>
+                    <button className="w-1/3 bg-gray-100 ms-3 rounded-lg font-bold md:text-sm text-xs md:block hidden">Explorer</button>
                 </div>
+                {/* <ButtonScroll/> */}
                 <div className='ms-5'>
                     <button type="button" className="md:block hidden text-black bg-gray-100 rounded-lg md:text-md text-sm px-2 py-2 mb-1 font-bold">Latest Job</button>
                 </div>
@@ -309,11 +284,11 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
                         <p className='text-gray-500 md:text-md md:text-sm text-xs'>2/2 Jobs in 360001, Rajkot, Gujarat, India</p>
                     </div>
                 </div>
-                <div className="flex mt-[70%] justify-center items-center md:hidden block">
+                {/* <div className="flex mt-[70%] justify-center items-center md:hidden block">
                     <div className="relative md:h-screen h-[210px] overflow-hidden md:hidden block ">
 
                     </div>
-                </div>
+                </div> */}
 
                 <div className="md:hidden block ">
                     <Drawer.Root
@@ -337,12 +312,9 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
                                 <div
                                     className={clsx("flex flex-col max-w-2xl h-full mx-auto w-screen p-2 pt-5", {
                                         "overflow-y-auto": snap === 1,
-                                        "overflow-y-auto": snap !== 0,
+                                        "overflow-hidden": snap !== 0,
                                     })}
                                 >
-                                    {/* <div className="flex md:hidden block">
-                                        <SmallProfileCard />
-                                    </div> */}
                                     <div className='md:hidden block'>
                                         <div className='flex w-screen justify-center items-center '>
                                             <div className='md:ms-0 md:mt-0 text-sm'>
@@ -416,8 +388,7 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
                             </Drawer.Content>
                         </Drawer.Portal>
                     </Drawer.Root>
-                </div>
-                
+                </div>           
                 <div className='md:block hidden'>
                     <ProfileCard />
                 </div>
@@ -430,7 +401,7 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
                     <button className='ms-8 bg-gray-100 shadow-xl shadow-black rounded-md md:px-4 px-2 md:py-4 py-2 md:ms-5 card-body flex'><IoMdShare /></button>
                 </div>
             </RWebShare>
-
+       
         </>
     );
 };

@@ -28,6 +28,7 @@ const SidebarContent: React.FC<SidebarContentProps> = ({ menuItems, open }) => {
                     </li>
                 ))}
             </ul>
+            
         </div>
     );
 }
