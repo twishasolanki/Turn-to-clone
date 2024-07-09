@@ -2,26 +2,25 @@
 import React from 'react';
 import { FaDirections, FaRegBookmark, FaRegClock } from "react-icons/fa";
 import { GrDirections } from "react-icons/gr";
-import { IoIosArrowBack } from "react-icons/io";
 import { IoCalendarClearOutline, IoLocationOutline } from "react-icons/io5";
 import { MdBlockFlipped, MdOutlineShare } from "react-icons/md";
 import { TbCurrencyDollar } from "react-icons/tb";
+import { RiArrowRightSLine } from "react-icons/ri";
 
 interface MapProps {
     onBackClick: () => void;
-   
 }
 
 const Map: React.FC<MapProps> = ({ onBackClick}) => {
     return (
-        <div >
-            <div className="hidden md:block   max-w-2xl ms-5 p-2 mt-1 bg-white border border-gray-200 rounded-lg shadow">
+        <div>
+            <div className="hidden md:block  relative max-w-2xl ms-5 p-2 mt-1 bg-white border border-gray-200 rounded-lg shadow">
                 <div className="flex">
                     <div className="w-1/2">
                         <p className='text-md font-bold'>Marketing Consultant</p>
                     </div>
                     <div className="w-1/2 flex justify-end items-end">
-                        <button onClick={onBackClick} className='bg-blue-500 rounded-md px-1 py-1 text-white'><IoIosArrowBack /></button>
+                        <button onClick={onBackClick} className='bg-blue-500 rounded-md px-1 py-1 text-white'><RiArrowRightSLine /></button>
                     </div>
                 </div>
                 <p className='text-sm text-blue-500 font-medium'>Tailwind CSS Solution</p>
@@ -145,13 +144,13 @@ const Map: React.FC<MapProps> = ({ onBackClick}) => {
                 </div>
             </div>
 
-            <div className='flex overflow-x-hidden mt-3 md:hidden block'>
+            <div className='flex overflow-x-hidden md:hidden block'>
                 <div className='fixed right-0'>
                     <div className='flex'>
                         <div className="block md:hidden max-w-md p-2 mt-1 bg-white border border-gray-200 rounded-lg shadow relative">
-                            <div className="h-10 absolute top-96 left-[-5px] z-50">
+                            <div className="h-10 absolute top-64 left-[-17px] z-50">
                                 <button onClick={onBackClick} className='bg-blue-700 rounded-md px-2 py-2 text-white'>
-                                    <IoIosArrowBack />
+                                <RiArrowRightSLine />
                                 </button>
                             </div>
                             <div className="flex">
@@ -198,7 +197,8 @@ const Map: React.FC<MapProps> = ({ onBackClick}) => {
                             </div>
                             <hr className='mt-1' />
                             <p className='font-bold text-md p-1'>Overview</p>
-                            <div className='overflow-y-scroll h-1/3 '>
+                        
+                            <div className='overflow-y-scroll h-64 '>
                                 <div className='flex-wrap text-xs'>
                                     <div className='card-body card bg-white p-2 shadow-xl shadow-gray-300 w-40 rounded-lg'>
                                         <p className='font-bold'>Total Applicants</p>
@@ -273,9 +273,12 @@ const Map: React.FC<MapProps> = ({ onBackClick}) => {
                                         <span className='text-purple-800'>DAY-SHIFT</span>
                                     </p>
                                 </div>
-                                <hr className='mt-3' />
+                               
+                            </div>
+                         
+                            <hr className='mt-2' />
                                 <div className='mb-14'>
-                                    <div className="flex mt-2 text-xs">
+                                    <div className="flex mt-3 text-xs">
                                         <div className="w-1/3">
                                             <button className='bg-blue-500 rounded-md px-4 py-3 text-white font-bold'>Apply</button>
                                         </div>
@@ -286,16 +289,15 @@ const Map: React.FC<MapProps> = ({ onBackClick}) => {
                                             <button className='bg-red-500 rounded-md px-4 py-3 text-white font-bold'>Report</button>
                                         </div>
                                     </div>
-                                    <div className='flex justify-center items-center text-sm'>
-                                        <p className='flex'>
-                                            <FaRegClock className='mt-1' />~3 min
+                                    <div className='flex justify-center items-center text-xs'>
+                                        <p className='flex text-xs -mt-3'>
+                                            <FaRegClock />~3 min
                                         </p>
                                     </div>
                                     <div className='flex justify-end items-end'>
-                                        <p className='text-red-600'>Something Wrong?</p>
+                                        <p className='text-red-600 text-xs ms-5'>Something Wrong?</p>
                                     </div>
-                                </div>
-                            </div>
+                                </div>        
                         </div>
                     </div>
                 </div>

@@ -132,7 +132,7 @@ const ProfileCard: React.FC = () => {
 
     return (
         <div>
-            <div className='md:ms-0 md:mt-0 text-sm'>
+            <div className='md:ms-0 md:mt-0 text-sm absolute w-[30%]'>
                 <div className="mt-3 pl-4 pr-4 md:h-[calc(80vh-20px)] h-[calc(80vh-50vh)] md:overflow-y-scroll scrollable-element ">
                     {items.map((item) => (
                         <div key={item.id} className="block max-w-lg p-2 mt-3 bg-white border border-blue-200 rounded-lg shadow">

@@ -18,7 +18,7 @@ const SidebarContent: React.FC<SidebarContentProps> = ({ menuItems, open }) => {
                 {menuItems.map((item, index) => (
                     <li
                         key={index}
-                        className="px-3 py-2 my-2 hover:bg-blue-800 rounded-md duration-300 cursor-pointer flex gap-2 items-center relative group"
+                        className="px-3 py-2 my-2 hover:bg-[#5932EA] rounded-md duration-300 cursor-pointer flex gap-2 items-center relative group"
                     >
                         <div>{item.icons}</div>
                         <p className={`${!open && 'w-0 translate-x-24'} duration-500 overflow-hidden`}>{item.label}</p>
@@ -28,7 +28,6 @@ const SidebarContent: React.FC<SidebarContentProps> = ({ menuItems, open }) => {
                     </li>
                 ))}
             </ul>
-            
         </div>
     );
 }

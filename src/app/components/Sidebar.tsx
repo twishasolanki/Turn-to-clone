@@ -45,8 +45,8 @@ const Sidebar: React.FC = () => {
     const [open, setOpen] = useState(true);
     return (
         <>
-            <nav className={`shadow-md min-h-screen position-fixed md:block hidden p-2 flex-col duration-500 bg-gray-200 text-black ${open ? 'w-64' : 'w-16'}`}>
-                <div className="px-3 py-2 h-20 flex justify-between items-center">
+            <nav className={`shadow-md min-h-screen position-fixed md:block hidden p-2 flex-col relative duration-500 bg-gray-200 text-black ${open ? 'w-64' : 'w-16'}`}>
+                <div className="px-3 py-2 h-20 flex justify-between items-center ">
                     <img src='./assets/logo.png' alt="Logo" className={`${open ? 'w-32 md:block' : 'w-10 hidden'} rounded-md`} />
                     <div>
                         <MdMenuOpen size={34} className={`duration-500 cursor-pointer ${!open && 'rotate-180'}`} onClick={() => setOpen(!open)} />
