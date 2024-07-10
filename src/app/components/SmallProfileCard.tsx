@@ -9,7 +9,6 @@ import { ImNewTab } from "react-icons/im";
 import { IoLocationOutline } from "react-icons/io5";
 import { LuDollarSign } from "react-icons/lu";
 import { MdBlockFlipped } from "react-icons/md";
-import 'react-modern-drawer/dist/index.css';
 
 const SmallProfileCard: React.FC = () => {
     const items = [

@@ -9,13 +9,12 @@ import { ImNewTab } from "react-icons/im";
 import { IoLocationOutline } from "react-icons/io5";
 import { LuDollarSign } from "react-icons/lu";
 import { MdBlockFlipped } from "react-icons/md";
-import 'react-modern-drawer/dist/index.css';
 
 const ProfileCard: React.FC = () => {
     const items = [
         {
             id: 1,
-            title: 'Marketing Consultant',
+            title: 'Marketing Consultant ',
             subtitle: 'Tailwind CSS Solution',
             location: 'Rajkot,360001',
             time: 'Part-Time',
@@ -132,15 +131,15 @@ const ProfileCard: React.FC = () => {
 
     return (
         <div>
-            <div className='md:ms-0 md:mt-0 text-sm absolute w-[30%]'>
-                <div className="mt-3 pl-4 pr-4 md:h-[calc(80vh-20px)] h-[calc(80vh-50vh)] md:overflow-y-scroll scrollable-element ">
+            <div className='md:ms-0 md:mt-0 text-sm absolute 2xl:w-[28%] xl:w-[30%] lg:w-[50%] md:w-[57%] sm:w-[50%]'>
+                <div className="mt-3 pl-4 pr-4  md:h-[calc(80vh-20px)] h-[calc(80vh-50vh)] md:overflow-y-scroll scrollable-element ">
                     {items.map((item) => (
-                        <div key={item.id} className="block max-w-lg p-2 mt-3 bg-white border border-blue-200 rounded-lg shadow">
+                        <div key={item.id} className="block  p-2 mt-3 bg-white border border-blue-200 rounded-lg shadow">
                             <div className="flex md:flex-row flex-col">
                                 <div className="md:w-1/2" onClick={() => setSelectedItem(item.id)}>
                                     <p className="font-bold md:text-md text-md ">{item.title}</p>
                                 </div>
-                                <div className="md:w-1/2 flex justify-end relative">
+                                <div className="md:w-1/2 flex justify-end items-end relative">
                                     <button onClick={() => togglePopup(item.id)} className="text-gray-500 focus:outline-none md:block hidden">
                                         <BsThreeDotsVertical />
                                     </button>
@@ -183,7 +182,7 @@ const ProfileCard: React.FC = () => {
                                 </div>
                             </div>
                             <div className="flex mt-2">
-                                <div className="md:w-28 ms-3 flex">
+                                <div className="md:w-20  flex">
                                     <GrDirections />
                                     <p className="ms-1 text-xs">{item.direction}</p>
                                 </div>

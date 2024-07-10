@@ -9,12 +9,14 @@ import { RiArrowRightSLine } from "react-icons/ri";
 
 interface MapProps {
     onBackClick: () => void;
+    onClick: () => void;
 }
 
-const Map: React.FC<MapProps> = ({ onBackClick}) => {
+const Map: React.FC<MapProps> = ({ onBackClick,onClick }) => {
     return (
         <div>
-            <div className="hidden md:block  relative max-w-2xl ms-5 p-2 mt-1 bg-white border border-gray-200 rounded-lg shadow">
+         
+         <div className="hidden md:block  relative max-w-2xl ms-5 p-2 mt-1 bg-white border border-gray-200 rounded-lg shadow">
                 <div className="flex">
                     <div className="w-1/2">
                         <p className='text-md font-bold'>Marketing Consultant</p>
@@ -144,7 +146,8 @@ const Map: React.FC<MapProps> = ({ onBackClick}) => {
                 </div>
             </div>
 
-            <div className='flex overflow-x-hidden md:hidden block'>
+
+            <div className='flex overflow-x-hidden md:hidden block' onClick={onClick}>
                 <div className='fixed right-0'>
                     <div className='flex'>
                         <div className="block md:hidden max-w-md p-2 mt-1 bg-white border border-gray-200 rounded-lg shadow relative">

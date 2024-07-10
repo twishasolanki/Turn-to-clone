@@ -9,7 +9,6 @@ import { IoMdShare } from "react-icons/io";
 import { IoLocationOutline } from 'react-icons/io5';
 import { MdLogout, MdOutlineDashboard, MdOutlineMenu } from "react-icons/md";
 import { TbWorldSearch } from "react-icons/tb";
-import 'react-modern-drawer/dist/index.css';
 import { RWebShare } from "react-web-share";
 import Typewriter from 'typewriter-effect';
 import Drawercard from '../Drawer';
@@ -38,7 +37,7 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
     const closemenu = () => {
         setIsOpenmenu(false);
     };
-  
+
     const handleClickOutside = (event: MouseEvent) => {
         const popup = document.getElementById("popupMenu");
         if (popup && !popup.contains(event.target as Node)) {
@@ -179,12 +178,14 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
                     </div>
                 </div>
 
-                <div className="flex md:ms-2 relative md:justify-normal justify-center items-center mx-3 md:mt-0 mt-1 md:me-0 me-10 overflow-x-scroll md:w-full w-[60%] md:h-12 h-9 scrollhide md:overflow-hidden whitespace-nowrap">
-                    <button className="inline-flex items-center justify-center md:px-3 px-5 md:py-2 h-7 md:ms-3 ms-28 bg-[#5932EA]  rounded-lg text-white md:text-xs text-xs">last 15 days</button>
-                    <button className="inline-flex items-center justify-center md:px-3 px-5 py-2 h-7 bg-[#5932EA] ms-3 rounded-lg text-white md:text-xs text-xs">within 20 miles</button>
-                    <button className="inline-flex items-center justify-center md:px-3 px-5 py-2 h-7 bg-gray-100 ms-3 rounded-lg font-bold md:text-xs text-xs">Job Type</button>
-                    <button className="inline-flex items-center justify-center md:px-3 px-5 py-2 h-7 bg-gray-100 ms-3 rounded-lg font-bold md:text-xs text-xs">Explorer</button>
-                </div>
+                {/* <div className="flex md:ms-2 relative md:justify-normal justify-center items-center mx-3 md:mt-0 mt-1 md:me-0 me-10 overflow-x-scroll md:w-full w-[60%] md:h-12 h-9 scrollhide md:overflow-hidden whitespace-nowrap">
+                    <div className=''>
+                        <button className="inline-flex items-center justify-center md:px-3 px-5 md:py-2 h-7 md:ms-3 ms-28 bg-[#5932EA]  rounded-lg text-white md:text-xs text-xs">last 15 days</button>
+                        <button className="inline-flex items-center justify-center md:px-3 px-5 py-2 h-7 bg-[#5932EA] ms-3 rounded-lg text-white md:text-xs text-xs">within 20 miles</button>
+                        <button className="inline-flex items-center justify-center md:px-3 px-5 py-2 h-7 bg-gray-100 ms-3 rounded-lg font-bold md:text-xs text-xs">Job Type</button>
+                        <button className="inline-flex items-center justify-center md:px-3 px-5 py-2 h-7 bg-gray-100 ms-3 rounded-lg font-bold md:text-xs text-xs">Explorer</button>
+                    </div>  
+                </div> */}
 
                 <div className='ms-5 relative'>
                     <button type="button" className="md:block hidden text-black bg-gray-100 rounded-lg md:text-md text-sm px-2 py-2 mb-1 font-bold">Latest Job</button>
@@ -202,7 +203,7 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
                     <ProfileCard />
                 </div>
             </div>
-            
+
             <RWebShare
                 data={{
                     text: text, title: title, url: url,
