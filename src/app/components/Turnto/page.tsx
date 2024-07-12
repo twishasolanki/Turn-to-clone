@@ -11,8 +11,9 @@ import { MdLogout, MdOutlineDashboard, MdOutlineMenu } from "react-icons/md";
 import { TbWorldSearch } from "react-icons/tb";
 import { RWebShare } from "react-web-share";
 import Typewriter from 'typewriter-effect';
-import Drawercard from '../Drawer';
+import Drawercard from '@/app/components/Drawer';
 import SidebarContent from '../SidebarContent';
+import { FaLocationCrosshairs } from "react-icons/fa6";
 
 interface ShareButtonProps {
     title: string;
@@ -98,7 +99,7 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
         <>
             <div className="flex flex-row flex-col scrollhide">
                 <div className=" md:flex md:flex-row flex-col md:w-full md:mt-0 mt-1 w-screen">
-                    <div className="flex mt-2  md:max-w-lg md:ms-4 ms-6 md:me-0 me-8">
+                    <div className="flex mt-2  md:max-w-lg md:ms-4 ms-2 md:me-0 me-3">
                         <div className="relative md:w-60 w-full ">
                             <div className="absolute inset-y-0 start-0 flex  ps-3 pointer-events-none ">
                                 <img src='./assets/TurnTo.png' className='h-5 w-5 md:mt-2 mt-1' />
@@ -139,20 +140,20 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
                                 </div>
                             </div>
                             <div className='flex w-full md:w-60'>
-                                <input type="text" className="bg-gray-50 border  text-gray-900 text-sm rounded-md md:rounded-l-lg  block w-full ps-24 md:p-2.5 p-1"
+                                <input type="text" className="bg-white   text-gray-900 text-sm md:rounded-e-xs rounded-md  block w-full ps-24 md:p-2.5 p-1 rounded-e-xs"
                                 />
-                                <button onClick={toggleDrawer} type="submit" className="md:hidden block absolute end-1 font-medium rounded-lg text-sm px-4 py-2 "><MdOutlineMenu /></button>
+                                <button onClick={toggleDrawer} type="submit" className="md:hidden block absolute end-1 font-medium  text-sm px-4 py-2 "><MdOutlineMenu /></button>
                             </div>
                         </div>
                     </div>
-                    <form className="max-w-2xl mx-auto md:max-w-xl flex  md:mt-0 mt-1 md:ms-0 ms-6 md:me-0 me-8">
+                    <form className="max-w-2xl mx-auto md:max-w-xl flex  md:mt-0 mt-1 md:ms-0 ms-2 md:me-0 me-3">
                         <div className="flex md:w-64 w-full ">
                             <div className="relative w-full md:mt-2">
                                 <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                    <IoLocationOutline className='bg-gray-50' />
+                                    <IoLocationOutline className='bg-gray-200' />
                                 </div>
-                                <input type="search" id="default-search" className="block w-full md:p-2.5 p-1.5 ps-8 text-sm text-gray-900 border border-gray-300 rounded-md bg-gray-50  " placeholder="360001, Rajkot, Gujrat" required />
-                                <button type="submit" className="absolute top-0 end-0 p-3 text-sm font-medium h-full text-white bg-[#5932EA]     rounded-e-md  ">
+                                <input type="search" id="default-search" className="block w-full md:p-2.5 p-1.5 md:ps-8 ps-10 text-sm text-gray-900 border md:rounded-s-xs rounded-md bg-gray-200  " placeholder="360001, Rajkot, Gujrat" required />
+                                <button type="submit" className="absolute top-0 end-0 p-3 text-sm font-medium h-full text-white bg-[#5932EA] rounded-e-md  ">
                                     <svg className="w-4 md:h-4 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                                     </svg>
@@ -178,7 +179,7 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
                     </div>
                 </div>
 
-                {/* <div className="flex md:ms-2 relative md:justify-normal justify-center items-center mx-3 md:mt-0 mt-1 md:me-0 me-10 overflow-x-scroll md:w-full w-[60%] md:h-12 h-9 scrollhide md:overflow-hidden whitespace-nowrap">
+                {/* <div className="flex md:ms-2 relative md:justify-normal justify-center items-center mx-3 md:mt-0 mt-1 md:me-0 me-10 overflow-x-scroll md:w-full w-[60%] md:h-8 h-9 scrollhide md:overflow-hidden whitespace-nowrap">
                     <div className=''>
                         <button className="inline-flex items-center justify-center md:px-3 px-5 md:py-2 h-7 md:ms-3 ms-28 bg-[#5932EA]  rounded-lg text-white md:text-xs text-xs">last 15 days</button>
                         <button className="inline-flex items-center justify-center md:px-3 px-5 py-2 h-7 bg-[#5932EA] ms-3 rounded-lg text-white md:text-xs text-xs">within 20 miles</button>
@@ -187,16 +188,24 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
                     </div>  
                 </div> */}
 
-                <div className='ms-5 relative'>
-                    <button type="button" className="md:block hidden text-black bg-gray-100 rounded-lg md:text-md text-sm px-2 py-2 mb-1 font-bold">Latest Job</button>
+                <div className="flex mx-auto relative mt-1 md:ms-5 text-center justify-center items-center text-xs">
+                    <div className="bg-[#5932EA] p-2 md:w-28 w-[100px] h-7 rounded-lg text-white font-bold" >last 15 days</div>
+                    <div className="bg-[#5932EA] p-2 md:w-36 w-[120px] rounded-lg ms-1 h-7  text-white font-bold">within 20 miles</div>
+                    <div className="bg-gray-100 p-2 md:w-24 w-[78px] rounded-lg ms-1 h-7 font-bold " >Job Type</div>
+                    <div className="bg-gray-100 p-2 md:w-24 rounded-lg ms-1 h-7 font-bold md:block hidden" >Explorer</div>
                 </div>
 
-                {/* <div className='flex mx-auto justify-start items-start'>
-                    <div className='card-body md:mt-0 bg-white md:w-[60%] w-full  md:ms-5  p-2 rounded-md'>
-                        <p className='text-gray-500 md:text-md md:text-sm text-xs'>2/2 Jobs in 360001, Rajkot, Gujarat, India</p>
+                <div className='ms-5 relative mt-1'>
+                    <button type="button" className="md:block hidden text-black bg-gray-100 rounded-lg md:text-md text-sm h-7 p-1 w-24 mb-1 font-bold">Latest Job</button>
+                </div>
+
+                <div className='flex relative justify-start items-start md:p-0 ms-3 p-2 md:block hidden'>
+                    <div className='card-body md:mt-0 bg-white md:w-[60%] w-full md:ms-2 h-8  rounded-md'>
+                        <p className='text-gray-500 md:text-md md:text-sm text-xs ms-1 p-1'>2/2 Jobs in 360001, Rajkot, Gujarat, India</p>
                     </div>
-                </div>  */}
-                <div className='absolute'>
+                </div>
+
+                <div className='absolute md:hidden block'>
                     <Drawercard />
                 </div>
                 <div className='md:block hidden '>
@@ -212,6 +221,9 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
                     <button className='ms-2 bg-gray-100 shadow-xl shadow-black rounded-md md:px-4 px-2 md:py-4 py-2 md:ms-5 card-body flex'><IoMdShare /></button>
                 </div>
             </RWebShare>
+            <div className='fixed bottom-7 2xl:left-[95%] xl:left-[95%] lg:left-[93%] md:left-[100%] mt-auto'>
+                <button className='mg:ms-48 ms:ms-40 xd:ms-36  bg-gray-100 shadow-xl shadow-black rounded-md md:px-4 px-2 md:py-4 py-2 md:ms-5 card-body flex'><FaLocationCrosshairs /></button>
+            </div>
         </>
     );
 };

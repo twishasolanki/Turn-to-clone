@@ -14,7 +14,7 @@ interface SidebarContentProps {
 const SidebarContent: React.FC<SidebarContentProps> = ({ menuItems, open }) => {
     return (
         <div>
-            <ul className="flex-1">
+            <ul className="flex-1 text-sm">
                 {menuItems.map((item, index) => (
                     <li
                         key={index}

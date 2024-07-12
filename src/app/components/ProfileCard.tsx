@@ -3,7 +3,7 @@ import Map from '@/app/components/Map';
 import React, { useEffect, useState } from 'react';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { CiCalendar, CiFlag1, CiShare2 } from "react-icons/ci";
-import { FaRegBookmark, FaRegClock } from "react-icons/fa";
+import { FaBookmark, FaRegBookmark, FaRegClock } from "react-icons/fa";
 import { GrDirections } from "react-icons/gr";
 import { ImNewTab } from "react-icons/im";
 import { IoLocationOutline } from "react-icons/io5";
@@ -15,7 +15,7 @@ const ProfileCard: React.FC = () => {
         {
             id: 1,
             title: 'Marketing Consultant ',
-            subtitle: 'Tailwind CSS Solution',
+            subtitle: 'Tailwind',
             location: 'Rajkot,360001',
             time: 'Part-Time',
             price: '1000-20000',
@@ -28,7 +28,7 @@ const ProfileCard: React.FC = () => {
         {
             id: 2,
             title: 'Marketing Consultant',
-            subtitle: 'Tailwind CSS Solution',
+            subtitle: 'Tailwind',
             location: 'Rajkot,360001',
             time: 'Part-Time',
             price: '1000-20000',
@@ -41,7 +41,7 @@ const ProfileCard: React.FC = () => {
         {
             id: 3,
             title: 'Marketing Consultant',
-            subtitle: 'Tailwind CSS Solution',
+            subtitle: 'Tailwind',
             location: 'Rajkot,360001',
             time: 'Part-Time',
             price: '1000-20000',
@@ -54,7 +54,7 @@ const ProfileCard: React.FC = () => {
         {
             id: 4,
             title: 'Marketing Consultant',
-            subtitle: 'Tailwind CSS Solution',
+            subtitle: 'Tailwind',
             location: 'Rajkot,360001',
             time: 'Part-Time',
             price: '1000-20000',
@@ -67,7 +67,7 @@ const ProfileCard: React.FC = () => {
         {
             id: 5,
             title: 'Marketing Consultant',
-            subtitle: 'Tailwind CSS Solution',
+            subtitle: 'Tailwind ',
             location: 'Rajkot,360001',
             time: 'Part-Time',
             price: '1000-20000',
@@ -80,7 +80,7 @@ const ProfileCard: React.FC = () => {
         {
             id: 6,
             title: 'Marketing Consultant',
-            subtitle: 'Tailwind CSS Solution',
+            subtitle: 'Tailwind',
             location: 'Rajkot,360001',
             time: 'Part-Time',
             price: '1000-20000',
@@ -95,6 +95,7 @@ const ProfileCard: React.FC = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [selectedItem, setSelectedItem] = useState<number | null>(null);
     const [activePopupId, setActivePopupId] = useState<number | null>(null);
+    const [bookmarkedItems, setBookmarkedItems] = useState({});
 
     const togglePopup = (id: number) => {
         if (activePopupId === id) {
@@ -104,6 +105,13 @@ const ProfileCard: React.FC = () => {
             setIsOpen(true);
             setActivePopupId(id);
         }
+    };
+
+    const toggleBookmark = (id) => {
+        setBookmarkedItems(prev => ({
+            ...prev,
+            [id]: !prev[id]
+        }));
     };
 
     const handleClickOutside = (event: MouseEvent) => {
@@ -134,7 +142,7 @@ const ProfileCard: React.FC = () => {
             <div className='md:ms-0 md:mt-0 text-sm absolute 2xl:w-[28%] xl:w-[30%] lg:w-[50%] md:w-[57%] sm:w-[50%]'>
                 <div className="mt-3 pl-4 pr-4  md:h-[calc(80vh-20px)] h-[calc(80vh-50vh)] md:overflow-y-scroll scrollable-element ">
                     {items.map((item) => (
-                        <div key={item.id} className="block  p-2 mt-3 bg-white border border-blue-200 rounded-lg shadow">
+                        <div key={item.id} className="block  p-2 mt-1 bg-white border border-blue-200 rounded-lg shadow">
                             <div className="flex md:flex-row flex-col">
                                 <div className="md:w-1/2" onClick={() => setSelectedItem(item.id)}>
                                     <p className="font-bold md:text-md text-md ">{item.title}</p>
@@ -159,9 +167,22 @@ const ProfileCard: React.FC = () => {
                                 <div className="md:w-1/2">
                                     <p className="text-blue-400 md:text-md text-xs">{item.subtitle}</p>
                                 </div>
+                                <div className="md:w-1/2 w-full flex justify-end items-end font-bold ">
                                 <div className="md:w-1/2 w-full flex justify-end items-end">
-                                    <FaRegBookmark />
-                                </div>
+                                {bookmarkedItems[item.id] ? (
+                                    <FaBookmark 
+                                        style={{ color: 'black', cursor: 'pointer' }}
+                                        onClick={() => toggleBookmark(item.id)}
+                                    />
+                                ) : (
+                                    <FaRegBookmark 
+                                        style={{ color: 'gray', cursor: 'pointer' }}
+                                        onClick={() => toggleBookmark(item.id)}
+                                    />
+                                )}
+                            </div>
+                            </div>
+
                             </div>
                             <div className="flex mt-1">
                                 <div className="md:w-1/4 flex">

@@ -20,6 +20,9 @@ const config: Config = {
       // => @media (min-width: 640px) { ... }
       'xm':'389px',
       'md': '768px',
+      'mg':'425px',
+      'xd':'320px',
+      'ms':'375px',
       // 'nd':'800px',
       // => @media (min-width: 768px) { ... }
 
