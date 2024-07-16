@@ -48,5 +48,11 @@ body {
 }
 
 
+.sidebar:hover .sidebar-label {
+  display: inline;
+  opacity: 1;
+  width: 130px;
+}
+
 
 
