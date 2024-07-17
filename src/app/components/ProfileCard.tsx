@@ -14,7 +14,7 @@ const ProfileCard: React.FC = () => {
     const items = [
         {
             id: 1,
-            title: 'Marketing Consultant ',
+            title: 'Marketing Consultant',
             subtitle: 'Tailwind',
             location: 'Rajkot,360001',
             time: 'Part-Time',
@@ -140,11 +140,11 @@ const ProfileCard: React.FC = () => {
     return (
         <div>
             <div className='md:ms-0 md:mt-0 text-sm absolute 2xl:w-[28%] xl:w-[30%] lg:w-[50%] md:w-[57%] sm:w-[50%]'>
-                <div className="mt-3 pl-4 pr-4  md:h-[calc(80vh-20px)] h-[calc(80vh-50vh)] md:overflow-y-scroll scrollable-element ">
+                <div className="mt-3 pl-4 pr-4  md:h-[calc(80vh-20px)] h-[calc(80vh-50vh)] md:overflow-y-scroll scrollable-element " >
                     {items.map((item) => (
-                        <div key={item.id} className="block  p-2 mt-1 bg-white border border-blue-200 rounded-lg shadow">
+                        <div key={item.id} onClick={() => setSelectedItem(item.id)} className="block  p-2 mt-1 bg-white border border-blue-200 rounded-lg shadow">
                             <div className="flex md:flex-row flex-col">
-                                <div className="md:w-1/2" onClick={() => setSelectedItem(item.id)}>
+                                <div className="md:w-1/2" >
                                     <p className="font-bold md:text-md text-md ">{item.title}</p>
                                 </div>
                                 <div className="md:w-1/2 flex justify-end items-end relative">
@@ -168,20 +168,20 @@ const ProfileCard: React.FC = () => {
                                     <p className="text-blue-400 md:text-md text-xs">{item.subtitle}</p>
                                 </div>
                                 <div className="md:w-1/2 w-full flex justify-end items-end font-bold ">
-                                <div className="md:w-1/2 w-full flex justify-end items-end">
-                                {bookmarkedItems[item.id] ? (
-                                    <FaBookmark 
-                                        style={{ color: 'black', cursor: 'pointer' }}
-                                        onClick={() => toggleBookmark(item.id)}
-                                    />
-                                ) : (
-                                    <FaRegBookmark 
-                                        style={{ color: 'gray', cursor: 'pointer' }}
-                                        onClick={() => toggleBookmark(item.id)}
-                                    />
-                                )}
-                            </div>
-                            </div>
+                                    <div className="md:w-1/2 w-full flex justify-end items-end">
+                                        {bookmarkedItems[item.id] ? (
+                                            <FaBookmark
+                                                style={{ color: 'black', cursor: 'pointer' }}
+                                                onClick={() => toggleBookmark(item.id)}
+                                            />
+                                        ) : (
+                                            <FaRegBookmark
+                                                style={{ color: 'gray', cursor: 'pointer' }}
+                                                onClick={() => toggleBookmark(item.id)}
+                                            />
+                                        )}
+                                    </div>
+                                </div>
 
                             </div>
                             <div className="flex mt-1">
