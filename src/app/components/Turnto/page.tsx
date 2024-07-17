@@ -7,7 +7,7 @@ import { CiSettings } from 'react-icons/ci';
 import { GrMapLocation, GrUserSettings } from "react-icons/gr";
 import { IoMdShare } from "react-icons/io";
 import { IoLocationOutline } from 'react-icons/io5';
-import { MdLogout, MdOutlineDashboard, MdOutlineMenu } from "react-icons/md";
+import { MdLogout, MdOutlineDashboard, MdOutlineMenu, MdOutlineShare } from "react-icons/md";
 import { TbWorldSearch } from "react-icons/tb";
 import { RWebShare } from "react-web-share";
 import Typewriter from 'typewriter-effect';
@@ -71,7 +71,7 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
         {
             icons: <TbWorldSearch size={30} />,
             label: 'Explorer'
-        },
+        },  
         {
             icons: <MdOutlineDashboard size={30} />,
             label: 'Job Management'
@@ -97,7 +97,7 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
 
     return (
         <>
-            <div className="flex flex-row flex-col scrollhide ">
+            <div className="flex flex-row flex-col scrollhide">
                 <div className=" md:flex md:flex-row flex-col md:w-full md:mt-0 mt-1 w-screen">
                     <div className="flex mt-2  md:max-w-lg md:ms-4 ms-2 md:me-0 me-3">
                         <div className="relative md:w-60 w-full ">
@@ -140,7 +140,7 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
                                 </div>
                             </div>
                             <div className='flex w-full md:w-60'>
-                                <input type="text" className="bg-white text-gray-900 text-sm md:rounded-e-none rounded-md  block w-full ps-24 md:p-2.5 p-1 rounded-e-xs"
+                                <input type="text" className="bg-white text-gray-900 text-sm md:rounded-e-none rounded-md  block w-full ps-10 md:p-2.5 p-1 rounded-e-xs"
                                 />
                                 <button onClick={toggleDrawer} type="submit" className="md:hidden block absolute end-1 font-medium  text-sm px-4 py-2 "><MdOutlineMenu /></button>
                             </div>
@@ -176,10 +176,10 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
                                 <img src='./assets/logo.png' alt="Logo" className="mt-64" />
                             </div>
                         </div>
-                    </div>                   
+                    </div>
                 </div>
 
-                <div className="flex mx-auto relative mt-1 md:ms-5 text-center justify-center items-center text-xs">
+                <div className="flex ms-2 relative mt-1 md:ms-5 text-center  text-xs">
                     <div className="bg-[#5932EA]  p-2 md:w-28 w-[100px] h-7 rounded-lg text-white font-bold" >last 15 days</div>
                     <div className="bg-[#5932EA] p-2 md:w-36 w-[120px] rounded-lg ms-1 h-7  text-white font-bold">within 20 miles</div>
                     <div className="bg-gray-100 p-2 md:w-24 w-[78px] rounded-lg ms-1 h-7 font-bold " >Job Type</div>
@@ -212,6 +212,7 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title: string, text, url }) => {
                     <button className='ms-2 bg-gray-100 shadow-xl shadow-black rounded-md md:px-4 px-2 md:py-4 py-2 md:ms-5 card-body flex'><IoMdShare /></button>
                 </div>
             </RWebShare>
+
             <div className='fixed bottom-6 2xl:left-[95%] xl:left-[95%] lg:left-[93%] md:left-[100%] mt-auto'>
                 <button className='mg:ms-48 ms:ms-40 xd:ms-36  bg-gray-100 shadow-xl shadow-black rounded-md md:px-4 px-2 md:py-4 py-2 md:ms-5 card-body flex'><FaLocationCrosshairs /></button>
             </div>

@@ -1,17 +1,18 @@
 'use client'
 import React, { useEffect, useRef } from 'react';
-import { FaDirections, FaRegBookmark, FaRegClock } from "react-icons/fa";
+import { FaDirections, FaRegBookmark, FaRegClock, FaShare } from "react-icons/fa";
 import { GrDirections } from "react-icons/gr";
 import { IoCalendarClearOutline, IoLocationOutline } from "react-icons/io5";
 import { MdBlockFlipped, MdOutlineShare } from "react-icons/md";
 import { TbCurrencyDollar } from "react-icons/tb";
 import { RiArrowRightSLine } from "react-icons/ri";
+import { RWebShare } from 'react-web-share';
 
 interface MapProps {
     onBackClick: () => void;
 }
 
-const Map: React.FC<MapProps> = ({ onBackClick }) => {
+const Map: React.FC<MapProps> = ({ onBackClick, title, text, url }) => {
     const mapRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -28,7 +29,7 @@ const Map: React.FC<MapProps> = ({ onBackClick }) => {
     }, [onBackClick]);
 
     const handleContentClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        event.stopPropagation(); 
+        event.stopPropagation();
     };
 
     return (
@@ -167,21 +168,21 @@ const Map: React.FC<MapProps> = ({ onBackClick }) => {
 
             <div ref={mapRef} >
                 <div className='flex overflow-x-hidden md:hidden block'>
-                    <div className='fixed right-0 '>
+                    <div className='fixed right-0'>
                         <div className='flex' onClick={handleContentClick}>
                             <div className="block md:hidden h-screen max-w-md p-2 bg-white border border-gray-200 rounded-lg shadow relative">
-                                <div className="h-10 absolute top-64 left-[-17px] z-50">
+                                <div className="h-10 absolute top-96 left-[-17px] z-50">
                                     <button onClick={onBackClick} className='bg-blue-700 rounded-md px-2 py-2 text-white'>
                                         <RiArrowRightSLine />
                                     </button>
                                 </div>
                                 <div className="flex">
                                     <div className="w-1/2">
-                                        <p className='text-md font-bold'>Marketing Consultant</p>
+                                        <p className='text-lg font-bold'>Marketing Consultant</p>
                                     </div>
                                 </div>
-                                <p className='text-sm text-blue-500 font-medium'>Tailwind CSS Solution</p>
-                                <div className="flex text-sm">
+                                <p className='text-md text-blue-500 font-medium'>Tailwind CSS Solution</p>
+                                <div className="flex text-md">
                                     <div className="flex items-center">
                                         <IoLocationOutline className='mt-1' />
                                         <p className='flex text-sm ml-1'>Rajkot, Gujarat, India</p>
@@ -191,7 +192,7 @@ const Map: React.FC<MapProps> = ({ onBackClick }) => {
                                         <p className='flex ms-1'>Part-time</p>
                                     </div>
                                 </div>
-                                <div className='flex text-sm'>
+                                <div className='flex text-md'>
                                     <div className="flex items-center mt-1">
                                         <TbCurrencyDollar />
                                         <p>1000-20000</p>
@@ -202,15 +203,22 @@ const Map: React.FC<MapProps> = ({ onBackClick }) => {
                                         <p>~2 - 3 mi</p>
                                     </div>
                                 </div>
-                                <div className='flex items-center text-sm '>
+                                <div className='flex items-center text-md '>
                                     <IoCalendarClearOutline className='mt-1' />
                                     <p className='ml-1 mt-1'>20 d ago</p>
                                 </div>
-                                <div className="justify-end items-center ml-auto space-x-5 mb-2">
-                                    <button className='bg-gray-50 rounded-md shadow-lg px-2 py-2'>
-                                        <MdOutlineShare />
-                                    </button>
-                                    <button className='bg-gray-50 rounded-md shadow-lg px-2 py-2'>
+                                <div className="justify-end items-center ml-auto space-x-5 mb-2 mt-2">
+                                        <RWebShare
+                                            data={{
+                                                text: text,
+                                                title: title,
+                                                url: url,
+                                            }}>
+                                            <button className='bg-gray-50 rounded-md shadow-lg px-2 py-2'>
+                                                <MdOutlineShare />
+                                            </button>
+                                        </RWebShare>
+                                     <button className='bg-gray-50 rounded-md shadow-lg px-2 py-2'>
                                         <FaRegBookmark />
                                     </button>
                                     <button className='bg-gray-50 rounded-md shadow-lg px-2 py-2'>
@@ -218,9 +226,9 @@ const Map: React.FC<MapProps> = ({ onBackClick }) => {
                                     </button>
                                 </div>
                                 <hr className='mt-3' />
-                                <p className='font-bold text-md p-1 mt-1'>Overview</p>
-                                <div className='overflow-y-scroll h-64'>
-                                    <div className='flex-wrap text-xs'>
+                                <p className='font-bold text-lg p-1 mt-2'>Overview</p>
+                                <div className='overflow-y-scroll h-[48%]'>
+                                    <div className='flex-wrap text-sm'>
                                         <div className='card-body card bg-white p-2 shadow-xl shadow-gray-300 w-40 rounded-lg'>
                                             <p className='font-bold'>Total Applicants</p>
                                             <p>0</p>
@@ -297,25 +305,26 @@ const Map: React.FC<MapProps> = ({ onBackClick }) => {
                                 </div>
                                 <hr className='mt-2' />
                                 <div className='mb-14'>
-                                 <div className="flex mt-3 text-xs">
-                                     <div className="w-1/3">
-                                         <button className='bg-blue-500 rounded-md px-4 py-3 text-white font-bold'>Apply</button>
-                                     </div>
-                                    <div className="w-1/3 flex justify-center items-center">
-                                        <FaDirections />
-                                     </div>
-                                    <div className="w-1/3 flex justify-end items-end">
-                                        <button className='bg-red-500 rounded-md px-4 py-3 text-white font-bold'>Report</button>
-                                     </div>
-                                 </div>
-                                <div className='flex justify-center items-center text-xs'>
-                                     <p className='flex text-xs -mt-3'>
-                                         <FaRegClock />~3 min
-                                    </p>                               </div>
-                                 <div className='flex justify-end items-end'>
-                                     <p className='text-red-600 text-xs ms-5'>Something Wrong?</p>
-                                 </div>
-                         </div>
+                                    <div className="flex mt-3 text-xs">
+                                        <div className="w-1/3">
+                                            <button className='bg-blue-500 rounded-md px-4 py-3 text-white font-bold'>Apply</button>
+                                        </div>
+                                        <div className="w-1/3 flex justify-center items-center">
+                                            <FaDirections />
+                                        </div>
+                                        <div className="w-1/3 flex justify-end items-end">
+                                            <button className='bg-red-500 rounded-md px-4 py-3 text-white font-bold'>Report</button>
+                                        </div>
+                                    </div>
+                                    <div className='flex justify-center items-center text-xs'>
+                                        <p className='flex text-xs -mt-3'>
+                                            <FaRegClock />~3 min
+                                        </p>
+                                    </div>
+                                    <div className='flex justify-end items-end'>
+                                        <p className='text-red-600 text-xs ms-5'>Something Wrong?</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

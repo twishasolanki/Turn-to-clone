@@ -13,7 +13,7 @@ function Sidebar() {
     const [isHovered, setIsHovered] = useState(false);
     const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(false);
     const [activeItem, setActiveItem] = useState(null);
-    const [isPopupOpen, setIsPopupOpen] = useState(false); // State for popup
+    const [isPopupOpen, setIsPopupOpen] = useState(false); 
     const rightSidebarRef = useRef(null);
 
     const handleItemClick = (item) => {
@@ -23,7 +23,7 @@ function Sidebar() {
 
     const handleCloseSidebar = () => {
         setIsRightSidebarOpen(false);
-        setActiveItem(null); // Reset active item when sidebar is closed
+        setActiveItem(null); 
     };
 
     const togglePopup = () => {

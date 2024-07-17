@@ -138,7 +138,7 @@ const ProfileCard: React.FC = () => {
     }
 
     return (
-        <div>
+        <>
             <div className='md:ms-0 md:mt-0 text-sm absolute 2xl:w-[28%] xl:w-[30%] lg:w-[50%] md:w-[57%] sm:w-[50%]'>
                 <div className="mt-3 pl-4 pr-4  md:h-[calc(80vh-20px)] h-[calc(80vh-50vh)] md:overflow-y-scroll scrollable-element " >
                     {items.map((item) => (
@@ -182,7 +182,6 @@ const ProfileCard: React.FC = () => {
                                         )}
                                     </div>
                                 </div>
-
                             </div>
                             <div className="flex mt-1">
                                 <div className="md:w-1/4 flex">
@@ -218,7 +217,7 @@ const ProfileCard: React.FC = () => {
                     ))}
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 

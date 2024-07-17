@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useRef, useState } from 'react';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { CiCalendar, CiFlag1, CiShare2 } from 'react-icons/ci';
@@ -17,8 +17,8 @@ const Drawercard: React.FC = () => {
     const [isOpen, setOpen] = useState<boolean>(false);
     const [selectedItemcard, setSelectedItemcard] = useState<number | null>(null);
     const [bookmarkedItems, setBookmarkedItems] = useState({});
-
     const ref = useRef<SheetRef>();
+
     const items = [
         {
             id: 1,
@@ -108,11 +108,8 @@ const Drawercard: React.FC = () => {
     };
 
     const handleItemClick = (id: number) => {
-        if (activePopupId === id) {
-            setActivePopupId(null);
-        } else {
-            setActivePopupId(id);
-        }
+        setSelectedItemcard(id);
+        setOpen(false);
     };
 
     const handleClosePopup = () => {
@@ -156,9 +153,9 @@ const Drawercard: React.FC = () => {
                         <div className='md:hidden block'>
                             <div className='flex w-screen p-1 justify-center items-center md:hidden block'>
                                 <div className='md:ms-0  md:mt-0 text-sm'>
-                                    <div className="mt-0  md:h-[calc(75vh-20px)] h-[calc(177vh-90vh)] md:overflow-y-scroll overflow-scroll md:hidden block ">
+                                    <div className="mt-0  md:h-[calc(75vh-20px)] h-[calc(200vh-95vh)] md:overflow-y-scroll overflow-scroll md:hidden block ">
                                         {items.map((item) => (
-                                            <div key={item.id} onClick={() => { setSelectedItemcard(item.id); setOpen(false); }} onContextMenu={(e) => handleContextMenu(e, item.id)} className="block p-2 mt-3 overflow-scroll bg-white border border-blue-200 rounded-lg shadow">
+                                            <div key={item.id} onClick={() => handleItemClick(item.id)} onContextMenu={(e) => handleContextMenu(e, item.id)} className="block p-2 mt-3 overflow-scroll bg-white border border-blue-200 rounded-lg shadow">
                                                 <div className="flex md:flex-row flex-col ">
                                                     <div className="md:w-1/2">
                                                         <p className="font-bold md:text-md text-md ">{item.title}</p>
@@ -184,17 +181,17 @@ const Drawercard: React.FC = () => {
                                                         <p className="text-blue-400 ">{item.subtitle}</p>
                                                     </div>
                                                     <div className="md:w-1/2 w-full flex justify-end items-end">
-                                                    {bookmarkedItems[item.id] ? (
-                                            <FaBookmark
-                                                style={{ color: 'black', cursor: 'pointer' }}
-                                                onClick={() => toggleBookmark(item.id)}
-                                            />
-                                        ) : (
-                                            <FaRegBookmark
-                                                style={{ color: 'gray', cursor: 'pointer' }}
-                                                onClick={() => toggleBookmark(item.id)}
-                                            />
-                                        )}
+                                                        {bookmarkedItems[item.id] ? (
+                                                            <FaBookmark
+                                                                style={{ color: 'black', cursor: 'pointer' }}
+                                                                onClick={() => toggleBookmark(item.id)}
+                                                            />
+                                                        ) : (
+                                                            <FaRegBookmark
+                                                                style={{ color: 'gray', cursor: 'pointer' }}
+                                                                onClick={() => toggleBookmark(item.id)}
+                                                            />
+                                                        )}
                                                     </div>
                                                 </div>
                                                 <div className="flex mt-1">
@@ -213,7 +210,7 @@ const Drawercard: React.FC = () => {
                                                         <LuDollarSign />
                                                         <p className="text-xs">{item.price}</p>
                                                     </div>
-                                                    <div className="md:w-1/4 flex ms-0 ">
+                                                    <div className="md:w-1/4 flex ms-3 ">
                                                         <CiCalendar />
                                                         <p className="ms-1 text-xs">{item.day}</p>
                                                     </div>
@@ -239,11 +236,10 @@ const Drawercard: React.FC = () => {
                         </div>
                     </Sheet.Content>
                 </Sheet.Container>
-                <Sheet.Backdrop onClick={handleClosePopup} />
+                <Sheet.Backdrop onClick={() => setOpen(false)} />
             </Sheet>
         </>
     )
 }
 
 export default Drawercard;
-
