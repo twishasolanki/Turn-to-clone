@@ -1,16 +1,16 @@
 'use client';
+import Map from '@/app/components/Map';
 import React, { useRef, useState } from 'react';
+import { AiOutlineLine } from "react-icons/ai";
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { CiCalendar, CiFlag1, CiShare2 } from 'react-icons/ci';
 import { FaBookmark, FaDirections, FaRegBookmark, FaRegClock } from 'react-icons/fa';
 import { GrDirections } from 'react-icons/gr';
+import { ImNewTab } from 'react-icons/im';
 import { IoLocationOutline } from 'react-icons/io5';
 import { LuDollarSign } from 'react-icons/lu';
-import { ImNewTab } from 'react-icons/im';
 import { MdBlockFlipped } from 'react-icons/md';
 import { Sheet, SheetRef } from 'react-modal-sheet';
-import Map from '@/app/components/Map';
-import { AiOutlineLine } from "react-icons/ai";
 
 const Drawercard: React.FC = () => {
     const [activePopupId, setActivePopupId] = useState<number | null>(null);
@@ -152,8 +152,8 @@ const Drawercard: React.FC = () => {
                     <Sheet.Content>
                         <div className='md:hidden block'>
                             <div className='flex w-screen p-1 justify-center items-center md:hidden block'>
-                                <div className='md:ms-0  md:mt-0 text-sm'>
-                                    <div className="mt-0  md:h-[calc(75vh-20px)] h-[calc(200vh-95vh)] md:overflow-y-scroll overflow-scroll md:hidden block ">
+                                <div className='text-sm'>
+                                    <div className="h-[calc(185dvh-95dvh)] md:overflow-y-scroll overflow-scroll md:hidden block ">
                                         {items.map((item) => (
                                             <div key={item.id} onClick={() => handleItemClick(item.id)} onContextMenu={(e) => handleContextMenu(e, item.id)} className="block p-2 mt-3 overflow-scroll bg-white border border-blue-200 rounded-lg shadow">
                                                 <div className="flex md:flex-row flex-col ">
@@ -234,6 +234,7 @@ const Drawercard: React.FC = () => {
                                 </div>
                             </div>
                         </div>
+                        
                     </Sheet.Content>
                 </Sheet.Container>
                 <Sheet.Backdrop onClick={() => setOpen(false)} />
@@ -243,3 +244,4 @@ const Drawercard: React.FC = () => {
 }
 
 export default Drawercard;
+

@@ -142,13 +142,59 @@ const ProfileCard: React.FC = () => {
             <div className='md:ms-0 md:mt-0 text-sm absolute 2xl:w-[28%] xl:w-[30%] lg:w-[50%] md:w-[57%] sm:w-[50%]'>
                 <div className="mt-3 pl-4 pr-4  md:h-[calc(80vh-20px)] h-[calc(80vh-50vh)] md:overflow-y-scroll scrollable-element " >
                     {items.map((item) => (
-                        <div key={item.id} onClick={() => setSelectedItem(item.id)} className="block  p-2 mt-1 bg-white border border-blue-200 rounded-lg shadow">
-                            <div className="flex md:flex-row flex-col">
-                                <div className="md:w-1/2" >
-                                    <p className="font-bold md:text-md text-md ">{item.title}</p>
+                        <div key={item.id} className="block flex p-2 mt-1 bg-white border border-blue-200 rounded-lg shadow">
+                            <div className="flex"  onClick={() => setSelectedItem(item.id)}>
+
+                                <div className="w-3/2" >
+                                    <div className="flex md:flex-row flex-col">
+                                        <div className="md:w-1/2 " >
+                                            <p className="font-bold md:text-md text-md ">{item.title}</p>
+                                        </div>
+
+                                    </div>
+                                    <div className="flex ">
+                                        <div className="md:w-1/2">
+                                            <p className="text-blue-400 md:text-md text-xs">{item.subtitle}</p>
+                                        </div>
+                                        <div className="md:w-1/2 w-full flex justify-end items-end font-bold ">
+
+                                        </div>
+                                    </div>
+                                    <div className="flex mt-1">
+                                        <div className="md:w-1/4 flex ">
+                                            <IoLocationOutline className='w-32 h-10 -mt-3 ' />
+                                            <p className="ms-1 text-xs">{item.location}</p>
+                                        </div>
+                                        <div className="md:w-1/4 flex ms-3">
+                                            <FaRegClock />
+                                            <p className="ms-1 text-xs">{item.time}</p>
+                                        </div>
+                                        <div className="md:w-1/4 flex ms-0">
+                                            <LuDollarSign />
+                                            <p className="text-xs flex">{item.price}</p>
+                                        </div>
+                                        <div className="md:w-1/4 flex ms-3 ">
+                                            <CiCalendar />
+                                            <p className="ms-1 text-xs">{item.day}</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex -mt-2">
+                                        <div className="md:w-20 flex">
+                                            <GrDirections />
+                                            <p className="ms-1 text-xs">{item.direction}</p>
+                                        </div>
+                                        <div className="md:w-1/2 ms-7 flex">
+                                            <FaRegClock />
+                                            <p className="ms-1 text-xs">{item.min}</p>
+                                        </div>
+                                    </div>
+                                    <div className="md:text-md text-xs font-bold mt-1 underline">{item.content}</div>
+                                    <div className="text-blue-400 md:text-md mt-1 text-xs font-medium">{item.login}</div>
                                 </div>
-                                <div className="md:w-1/2 flex justify-end items-end relative">
-                                    <button onClick={() => togglePopup(item.id)} className="text-gray-500 focus:outline-none md:block hidden">
+                            </div>
+                            <div className="w-[10%] " >
+                                <div className="md:w-1/2 flex justify-end items-end relative mx-auto ">
+                                    <button onClick={() => togglePopup(item.id)} className="text-gray-500 ms-1 focus:outline-none md:block hidden">
                                         <BsThreeDotsVertical />
                                     </button>
                                 </div>
@@ -162,57 +208,20 @@ const ProfileCard: React.FC = () => {
                                         </div>
                                     </div>
                                 )}
-                            </div>
-                            <div className="flex">
-                                <div className="md:w-1/2">
-                                    <p className="text-blue-400 md:text-md text-xs">{item.subtitle}</p>
-                                </div>
-                                <div className="md:w-1/2 w-full flex justify-end items-end font-bold ">
-                                    <div className="md:w-1/2 w-full flex justify-end items-end">
-                                        {bookmarkedItems[item.id] ? (
-                                            <FaBookmark
-                                                style={{ color: 'black', cursor: 'pointer' }}
-                                                onClick={() => toggleBookmark(item.id)}
-                                            />
-                                        ) : (
-                                            <FaRegBookmark
-                                                style={{ color: 'gray', cursor: 'pointer' }}
-                                                onClick={() => toggleBookmark(item.id)}
-                                            />
-                                        )}
-                                    </div>
+
+                                <div className="md:w-1/2 w-full flex justify-end items-end mt-2 mx-auto">
+                                    {bookmarkedItems[item.id] ? (
+                                        <FaBookmark
+                                            style={{ color: 'black', cursor: 'pointer' }}
+                                            onClick={() => toggleBookmark(item.id)}
+                                        />
+                                    ) : (
+                                        <FaRegBookmark
+                                            style={{ color: 'gray', cursor: 'pointer' }}
+                                            onClick={() => toggleBookmark(item.id)}/>
+                                    )}
                                 </div>
                             </div>
-                            <div className="flex mt-1">
-                                <div className="md:w-1/4 flex">
-                                    <IoLocationOutline />
-                                    <p className="ms-1 text-xs">{item.location}</p>
-                                </div>
-                                <div className="md:w-1/4 flex ms-5">
-                                    <FaRegClock />
-                                    <p className="ms-1 text-xs">{item.time}</p>
-                                </div>
-                                <div className="md:w-1/4 flex md:ms-0 ms-5">
-                                    <LuDollarSign />
-                                    <p className="text-xs">{item.price}</p>
-                                </div>
-                                <div className="md:w-1/4 flex ">
-                                    <CiCalendar />
-                                    <p className="ms-1 text-xs">{item.day}</p>
-                                </div>
-                            </div>
-                            <div className="flex mt-2">
-                                <div className="md:w-20  flex">
-                                    <GrDirections />
-                                    <p className="ms-1 text-xs">{item.direction}</p>
-                                </div>
-                                <div className="md:w-1/2 ms-5 flex">
-                                    <FaRegClock />
-                                    <p className="ms-1 text-xs">{item.min}</p>
-                                </div>
-                            </div>
-                            <div className="md:text-md text-xs font-bold mt-1 underline">{item.content}</div>
-                            <div className="text-blue-400 md:text-md mt-1 text-xs font-medium">{item.login}</div>
                         </div>
                     ))}
                 </div>

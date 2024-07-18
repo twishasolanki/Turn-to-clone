@@ -14,6 +14,7 @@ const AnyReactComponent: React.FC<AnyReactComponentProps> = ({ lat, lng }) => {
       background: 'blue',
       padding: '5px 10px',
       display: 'inline-flex',
+      position:'fixed',
       textAlign: 'center',
       alignItems: 'center',
       justifyContent: 'center',

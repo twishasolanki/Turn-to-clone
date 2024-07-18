@@ -1,11 +1,11 @@
 'use client'
-import React, { useEffect, useRef } from 'react';
-import { FaDirections, FaRegBookmark, FaRegClock, FaShare } from "react-icons/fa";
+import React, { useEffect, useRef, useState } from 'react';
+import { FaBookmark, FaDirections, FaRegBookmark, FaRegClock } from "react-icons/fa";
 import { GrDirections } from "react-icons/gr";
 import { IoCalendarClearOutline, IoLocationOutline } from "react-icons/io5";
 import { MdBlockFlipped, MdOutlineShare } from "react-icons/md";
-import { TbCurrencyDollar } from "react-icons/tb";
 import { RiArrowRightSLine } from "react-icons/ri";
+import { TbCurrencyDollar } from "react-icons/tb";
 import { RWebShare } from 'react-web-share';
 
 interface MapProps {
@@ -21,21 +21,21 @@ const Map: React.FC<MapProps> = ({ onBackClick, title, text, url }) => {
                 onBackClick();
             }
         };
-
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [onBackClick]);
+    });
 
     const handleContentClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         event.stopPropagation();
     };
+    const [isBookmarked, setIsBookmarked] = useState(false);
+
+    const handleBookmarkClick = () => {
+        setIsBookmarked(!isBookmarked);
+    };
 
     return (
         <>
-            <div className="hidden md:block  relative max-w-2xl ms-5 p-2 mt-1 bg-white border border-gray-200 rounded-lg shadow">
-                <div className="flex">
+            <div className="hidden z-10 md:block relative max-w-2xl ms-5 p-2 mt-1 bg-white border border-gray-200 rounded-lg shadow">
+                <div className="flex ">
                     <div className="w-1/2">
                         <p className='text-xl font-bold'>Marketing Consultant</p>
                     </div>
@@ -59,10 +59,19 @@ const Map: React.FC<MapProps> = ({ onBackClick, title, text, url }) => {
                     </div>
                     <div className='flex justify-end items-end mx-auto'>
                         <div className="flex ms-20">
-                            <button className='bg-gray-50 rounded-md shadow-lg shadow-gray-300 px-2 py-2'><MdOutlineShare /></button>
+                            <RWebShare
+                                data={{
+                                    text: text, title: title, url: url,
+                                }}>
+                                <button className='bg-gray-50 rounded-md shadow-lg px-2 py-2'>
+                                    <MdOutlineShare />
+                                </button>
+                            </RWebShare>
                         </div>
                         <div className="flex ms-5">
-                            <button className='bg-gray-50 rounded-md shadow-lg shadow-gray-300 px-2 py-2'><FaRegBookmark /></button>
+                            <button onClick={handleBookmarkClick} className='bg-gray-50 rounded-md shadow-lg shadow-gray-300 px-2 py-2'>
+                                {isBookmarked ? <FaBookmark className='text-black' /> : <FaRegBookmark />}
+                            </button>
                         </div>
                         <div className="flex ms-5">
                             <button className='bg-gray-50 rounded-md shadow-lg shadow-gray-300 px-2 py-2'><MdBlockFlipped /></button>
@@ -165,13 +174,13 @@ const Map: React.FC<MapProps> = ({ onBackClick, title, text, url }) => {
                     <p className='text-red-600'>Something Wrong?</p>
                 </div>
             </div>
-
+            
             <div ref={mapRef} >
                 <div className='flex overflow-x-hidden md:hidden block'>
                     <div className='fixed right-0'>
                         <div className='flex' onClick={handleContentClick}>
                             <div className="block md:hidden h-screen max-w-md p-2 bg-white border border-gray-200 rounded-lg shadow relative">
-                                <div className="h-10 absolute top-96 left-[-17px] z-50">
+                                <div className="h-10 absolute top-72 left-[-17px] z-50">
                                     <button onClick={onBackClick} className='bg-blue-700 rounded-md px-2 py-2 text-white'>
                                         <RiArrowRightSLine />
                                     </button>
@@ -208,19 +217,19 @@ const Map: React.FC<MapProps> = ({ onBackClick, title, text, url }) => {
                                     <p className='ml-1 mt-1'>20 d ago</p>
                                 </div>
                                 <div className="justify-end items-center ml-auto space-x-5 mb-2 mt-2">
-                                        <RWebShare
-                                            data={{
-                                                text: text,
-                                                title: title,
-                                                url: url,
-                                            }}>
-                                            <button className='bg-gray-50 rounded-md shadow-lg px-2 py-2'>
-                                                <MdOutlineShare />
-                                            </button>
-                                        </RWebShare>
-                                     <button className='bg-gray-50 rounded-md shadow-lg px-2 py-2'>
-                                        <FaRegBookmark />
-                                    </button>
+                                    <RWebShare
+                                        data={{
+                                            text: text,
+                                            title: title,
+                                            url: url,
+                                        }}>
+                                        <button className='bg-gray-50 rounded-md shadow-lg px-2 py-2'>
+                                            <MdOutlineShare />
+                                        </button>
+                                    </RWebShare>
+                                        <button onClick={handleBookmarkClick} className='bg-gray-50 rounded-md shadow-lg shadow-gray-300 px-2 py-2'>
+                                            {isBookmarked ? <FaBookmark className='text-black' /> : <FaRegBookmark />}
+                                        </button>
                                     <button className='bg-gray-50 rounded-md shadow-lg px-2 py-2'>
                                         <MdBlockFlipped />
                                     </button>
@@ -335,3 +344,6 @@ const Map: React.FC<MapProps> = ({ onBackClick, title, text, url }) => {
 }
 
 export default Map;
+
+
+
