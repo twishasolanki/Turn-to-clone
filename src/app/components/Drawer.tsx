@@ -1,23 +1,31 @@
 'use client';
 import Map from '@/app/components/Map';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { AiOutlineLine } from "react-icons/ai";
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { CiCalendar, CiFlag1, CiShare2 } from 'react-icons/ci';
 import { FaBookmark, FaDirections, FaRegBookmark, FaRegClock } from 'react-icons/fa';
 import { GrDirections } from 'react-icons/gr';
 import { ImNewTab } from 'react-icons/im';
+import { IoMdShare } from 'react-icons/io';
 import { IoLocationOutline } from 'react-icons/io5';
 import { LuDollarSign } from 'react-icons/lu';
 import { MdBlockFlipped } from 'react-icons/md';
 import { Sheet, SheetRef } from 'react-modal-sheet';
+import { RWebShare } from "react-web-share";
 
-const Drawercard: React.FC = () => {
+interface ShareButtonProps {
+    title: string;
+    text: string;
+    url: string;
+}
+
+const Drawercard: React.FC<ShareButtonProps> = ({ title, text, url }) => {
     const [activePopupId, setActivePopupId] = useState<number | null>(null);
     const [isOpen, setOpen] = useState<boolean>(false);
     const [selectedItemcard, setSelectedItemcard] = useState<number | null>(null);
     const [bookmarkedItems, setBookmarkedItems] = useState({});
-    const ref = useRef<SheetRef>();
+    const ref = useRef<SheetRef>(null);
 
     const items = [
         {
@@ -95,7 +103,7 @@ const Drawercard: React.FC = () => {
         }
     };
 
-    const toggleBookmark = (id) => {
+    const toggleBookmark = (id: number) => {
         setBookmarkedItems(prev => ({
             ...prev,
             [id]: !prev[id]
@@ -119,6 +127,19 @@ const Drawercard: React.FC = () => {
     const handleOpenPopup = () => {
         setOpen(true);
     };
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (activePopupId !== null) {
+                setActivePopupId(null);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [activePopupId]);
 
     if (selectedItemcard !== null) {
         return <Map onBackClick={() => setSelectedItemcard(null)} onClick={() => setOpen(false)} />
@@ -151,90 +172,102 @@ const Drawercard: React.FC = () => {
                     </Sheet.Header>
                     <Sheet.Content>
                         <div className='md:hidden block'>
-                            <div className='flex w-screen p-1 justify-center items-center md:hidden block'>
-                                <div className='text-sm'>
+                            <div className='flex w-screen p-1 justify-center items-center md:hidden block ' onClick={handleClosePopup}>
+                                <div className='text-sm  '>
                                     <div className="h-[calc(185dvh-95dvh)] md:overflow-y-scroll overflow-scroll md:hidden block ">
                                         {items.map((item) => (
-                                            <div key={item.id} onClick={() => handleItemClick(item.id)} onContextMenu={(e) => handleContextMenu(e, item.id)} className="block p-2 mt-3 overflow-scroll bg-white border border-blue-200 rounded-lg shadow">
-                                                <div className="flex md:flex-row flex-col ">
-                                                    <div className="md:w-1/2">
-                                                        <p className="font-bold md:text-md text-md ">{item.title}</p>
-                                                    </div>
-                                                    <div className="md:w-1/2 flex justify-end items-end relative">
-                                                        <button onClick={() => togglePopup(item.id)} className="text-gray-500 focus:outline-none md:block hidden">
-                                                            <BsThreeDotsVertical />
-                                                        </button>
-                                                    </div>
-                                                    {activePopupId === item.id && (
-                                                        <div className='flex justify-end items-end'>
-                                                            <div id="popupMenu" className="absolute  mt-2 w-58 py-2 bg-white border border-gray-200 rounded-lg shadow-xl z-10 text-sm">
-                                                                <a href="#" className="flex px-4 py-2 text-gray-800 hover:bg-gray-100 "><CiShare2 className='mt-1' /><span className='ms-2'>Share This Job</span></a>
-                                                                <a href="#" className="flex px-4 py-2 text-gray-800 hover:bg-gray-100"><ImNewTab className='mt-1' /><span className='ms-2'>Open In New Tab</span></a>
-                                                                <a href="#" className="flex px-4 py-2 text-gray-800 hover:bg-gray-100"><MdBlockFlipped className='mt-1' /><span className='ms-2'>Not Interested</span></a>
-                                                                <a href="#" className="flex px-4 py-2 text-gray-800 hover:bg-gray-100"><CiFlag1 className='mt-1' /><span className='ms-2'>Problem With This Job?</span></a>
+                                            <>
+                                                <div key={item.id} onContextMenu={(e) => handleContextMenu(e, item.id)} className="block flex p-2 w-screen mt-3 overflow-scroll bg-white border border-blue-200 rounded-lg shadow">
+                                                    <div className="flex w-3/2 ">
+                                                        <div className="" onClick={() => handleItemClick(item.id)}>
+                                                            <div className="flex md:flex-row flex-col">
+                                                                <div className="md:w-1/2">
+                                                                    <p className="font-bold md:text-md text-md ">{item.title}</p>
+                                                                </div>
+                                                                <div className="md:w-1/2 flex justify-end items-end relative">
+                                                                    <button onClick={() => togglePopup(item.id)} className="text-gray-500 focus:outline-none md:block hidden">
+                                                                        <BsThreeDotsVertical />
+                                                                    </button>
+                                                                </div>
                                                             </div>
+                                                            <div className="flex">
+                                                                <div className="md:w-1/2 md:text-md text-xs">
+                                                                    <p className="text-blue-400 ">{item.subtitle}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div className="flex mt-1">
+                                                                <div className="md:w-1/4 flex">
+                                                                    <IoLocationOutline />
+                                                                    <p className="ms-1 text-xs">{item.location}</p>
+                                                                </div>
+                                                                <div className="md:w-1/4 flex ms-2">
+                                                                    <FaRegClock />
+                                                                    <p className="ms-1 text-xs">{item.time}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div className="flex mt-1">
+                                                                <div className="md:w-1/4 w-24 flex md:ms-0 ">
+                                                                    <LuDollarSign />
+                                                                    <p className="text-xs flex">{item.price}</p>
+                                                                </div>
+                                                                <div className="md:w-1/4 w-20 flex">
+                                                                    <CiCalendar />
+                                                                    <p className="ms-1 text-xs">{item.day}</p>
+                                                                </div>
+                                                                <div className="md:w-28 w-20 flex ">
+                                                                    <GrDirections />
+                                                                    <p className="ms-1 text-xs">{item.direction}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div className="md:w-1/2 mt-1 flex">
+                                                                <FaRegClock />
+                                                                <p className="ms-1 text-xs">{item.min}</p>
+                                                            </div>
+                                                            <div className="md:text-md text-xs font-bold mt-1 underline">{item.content}</div>
+                                                            <div className="text-blue-400 md:text-md mt-1 text-xs font-medium">{item.login}</div>
                                                         </div>
-                                                    )}
-                                                </div>
-                                                <div className="flex">
-                                                    <div className="md:w-1/2 md:text-md text-xs">
-                                                        <p className="text-blue-400 ">{item.subtitle}</p>
                                                     </div>
-                                                    <div className="md:w-1/2 w-full flex justify-end items-end">
-                                                        {bookmarkedItems[item.id] ? (
-                                                            <FaBookmark
-                                                                style={{ color: 'black', cursor: 'pointer' }}
-                                                                onClick={() => toggleBookmark(item.id)}
-                                                            />
-                                                        ) : (
-                                                            <FaRegBookmark
-                                                                style={{ color: 'gray', cursor: 'pointer' }}
-                                                                onClick={() => toggleBookmark(item.id)}
-                                                            />
-                                                        )}
-                                                    </div>
-                                                </div>
-                                                <div className="flex mt-1">
-                                                    <div className="md:w-1/4 flex">
-                                                        <IoLocationOutline />
-                                                        <p className="ms-1 text-xs">{item.location}</p>
-                                                    </div>
-                                                    <div className="md:w-1/4 flex ms-3">
-                                                        <FaRegClock />
-                                                        <p className="ms-1 text-xs">{item.time}</p>
-                                                    </div>
-
-                                                </div>
-                                                <div className="flex mt-1">
-                                                    <div className="md:w-1/4 flex md:ms-0 ">
-                                                        <LuDollarSign />
-                                                        <p className="text-xs">{item.price}</p>
-                                                    </div>
-                                                    <div className="md:w-1/4 flex ms-3 ">
-                                                        <CiCalendar />
-                                                        <p className="ms-1 text-xs">{item.day}</p>
-                                                    </div>
-                                                    <div className="md:w-28 ms-3 flex">
-                                                        <GrDirections />
-                                                        <p className="ms-1 text-xs">{item.direction}</p>
-                                                    </div>
-                                                    <div className='flex justify-end items-end mx-auto ms-8 mg:ms-[138px] ms:ms-[88px]'>
-                                                        <FaDirections />
+                                                    <div className="w-1/2">
+                                                        <div className="md:w-1/2 w-full flex justify-end items-end">
+                                                            {bookmarkedItems[item.id] ? (
+                                                                <FaBookmark
+                                                                    style={{ color: 'black', cursor: 'pointer' }}
+                                                                    onClick={() => toggleBookmark(item.id)}
+                                                                />
+                                                            ) : (
+                                                                <FaRegBookmark
+                                                                    style={{ color: 'gray', cursor: 'pointer' }}
+                                                                    onClick={() => toggleBookmark(item.id)}
+                                                                />
+                                                            )}
+                                                        </div>
+                                                        <div className='flex justify-end items-end mx-auto ms-8 mt-6'>
+                                                            <FaDirections />
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div className="md:w-1/2 mt-1 flex">
-                                                    <FaRegClock />
-                                                    <p className="ms-1 text-xs">{item.min}</p>
-                                                </div>
-                                                <div className="md:text-md text-xs font-bold mt-1 underline">{item.content}</div>
-                                                <div className="text-blue-400 md:text-md mt-1 text-xs font-medium">{item.login}</div>
-                                            </div>
+                                                {activePopupId === item.id && (
+                                                    <div className='flex justify-end items-end'>
+                                                        <div id="popupMenu" className="absolute  mt-2 w-58 py-2 bg-white border border-gray-200 rounded-lg shadow-xl z-10 text-sm">
+                                                            <RWebShare data={{ text: text, title: title, url: url }}>
+                                                                <a href="#" className="flex px-4 py-2 text-gray-800 hover:bg-gray-100 ">
+                                                                    <button className='flex'>
+                                                                        <IoMdShare /><span className='ms-2'>Share This Job</span>
+                                                                    </button>
+                                                                </a>
+                                                            </RWebShare>
+                                                            <a href="#" className="flex px-4 py-2 text-gray-800 hover:bg-gray-100"><ImNewTab className='mt-1' /><span className='ms-2'>Open In New Tab</span></a>
+                                                            <a href="#" className="flex px-4 py-2 text-gray-800 hover:bg-gray-100"><MdBlockFlipped className='mt-1' /><span className='ms-2'>Not Interested</span></a>
+                                                            <a href="#" className="flex px-4 py-2 text-gray-800 hover:bg-gray-100"><CiFlag1 className='mt-1' /><span className='ms-2'>Problem With This Job?</span></a>
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </>
                                         ))}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
                     </Sheet.Content>
                 </Sheet.Container>
                 <Sheet.Backdrop onClick={() => setOpen(false)} />
@@ -244,4 +277,3 @@ const Drawercard: React.FC = () => {
 }
 
 export default Drawercard;
-

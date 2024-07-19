@@ -32,7 +32,7 @@ const SidebarContent: React.FC = () => {
         setIsPopupOpen(!isPopupOpen);
     };
 
-    const closePopup = () => {
+    const closePopup = () => {  
         setIsPopupOpen(false);
     };
 
@@ -78,10 +78,10 @@ const SidebarContent: React.FC = () => {
                 </li>
             </ul>
             <div className='flex justify-center items-center absolute'>
-                        <img src='./assets/logo.png' className='mt-[300%] w-44 ms-5' />
-                    </div>
+                <img src='./assets/logo.png' className='mt-[300%] w-44 ms-5' />
+            </div>
             {isRightSidebarOpen && (
-                <div ref={rightSidebarRef} className=" bg-gray-200 text-black w-80 h-screen absolute right-0 top-0">
+                <div ref={rightSidebarRef} className="border border-black bg-gray-200 text-black sm:w-72 xs:w-64 h-screen fixed right-0 top-0">
                     <div className="p-4 flex justify-between items-center">
                         <button
                             className="text-gray-500 "
@@ -96,7 +96,7 @@ const SidebarContent: React.FC = () => {
                         <div className="popup-overlay h-screen fixed inset-0 flex items-center justify-center mx-auto bg-black bg-opacity-50 z-50">
                             <div className="popup-box bg-white mx-auto md:w-96 w-full mg:right-24 ms:right-16 right-8 p-4 shadow-lg rounded-md relative z-60">
                                 <div className='flex justify-between items-start font-medium text-xl'>
-                                    <p>Explorer</p>
+                                      <p>Explorer</p>
                                     <button onClick={closePopup}><IoCloseSharp className='mt-1' /></button>
                                 </div>
                                 <hr className='mt-5' />
@@ -120,7 +120,7 @@ const SidebarContent: React.FC = () => {
                         </div>
                     </form>
                     <div className='flex justify-center items-center absolute'>
-                        <img src='./assets/logo.png' className='mt-[350%] w-44 ms-5' />
+                        <img src='./assets/logo.png' className='mt-[320%] w-44 ms-5' />
                     </div>
                 </div>
             )}

@@ -162,7 +162,7 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title, text, url }) => {
                             <div className="fixed inset-0 bg-black bg-opacity-50 z-20" onClick={closemenu} />
                         )}
                         <div className={`md:hidden block fixed top-0 right-0 bottom-0 w-64 bg-white shadow-lg transition-transform transform ${isOpenmenu ? 'translate-x-0' : 'translate-x-full'} z-30`}>
-                            <div className="p-8">
+                            <div className="p-8">       
                                 <SidebarContent />
                                 <img src='./assets/logo.png' alt="Logo" className="mt-64" />
                             </div>
@@ -198,7 +198,7 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title, text, url }) => {
                 </div>
             </RWebShare>
             <div className='fixed bottom-6 2xl:left-[95%] xl:left-[95%] lg:left-[93%] md:left-[100%] mt-auto'>
-                <button className='z-10 relative mg:ms-48 ms:ms-40 xd:ms-36 bg-gray-100 shadow-xl shadow-black rounded-md md:px-4 px-2 md:py-4 py-2 md:ms-5 card-body flex'>
+                <button className='relative mg:ms-48 ms:ms-40 xd:ms-36 bg-gray-100 shadow-xl shadow-black rounded-md md:px-4 px-2 md:py-4 py-2 md:ms-5 card-body flex'>
                     <FaLocationCrosshairs />
                 </button>
             </div>

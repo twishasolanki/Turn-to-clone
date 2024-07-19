@@ -8,7 +8,6 @@ import { IoCloseSharp } from "react-icons/io5";
 import { MdLogout, MdOutlineDashboard } from 'react-icons/md';
 import { TbWorldSearch } from 'react-icons/tb';
 
-
 function Sidebar() {
     const [isHovered, setIsHovered] = useState(false);
     const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(false);
@@ -16,7 +15,7 @@ function Sidebar() {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const rightSidebarRef = useRef(null);
 
-    const handleItemClick = (item:any) => {
+    const handleItemClick = (item: any) => {
         setActiveItem(item);
         setIsRightSidebarOpen(true);
     };
@@ -34,7 +33,7 @@ function Sidebar() {
         setIsPopupOpen(false);
     };
 
-    const handleClickOutside = (event:any) => {
+    const handleClickOutside = (event: any) => {
         if (rightSidebarRef.current && !rightSidebarRef.current.contains(event.target)) {
             handleCloseSidebar();
         }
@@ -54,9 +53,9 @@ function Sidebar() {
 
     return (
         <>
-            <div className="flex md:block hidden">
+            <div className=" md:block hidden">
                 <div
-                    className="sidebar bg-white text-black w-16 hover:w-72 h-screen relative transition-all duration-300"
+                    className="sidebar border border-blue-700 bg-white text-black w-16 hover:w-72 h-screen relative transition-all duration-300"
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                 >
@@ -96,7 +95,7 @@ function Sidebar() {
                     </ul>
                 </div>
                 {isRightSidebarOpen && (
-                    <div ref={rightSidebarRef} className="right-sidebar bg-gray-200 text-black w-80 h-screen absolute right-0 top-0 transition-all duration-300">
+                    <div ref={rightSidebarRef} className="right-sidebar border border-black bg-gray-200 text-black w-80 h-screen absolute right-0 top-0 transition-all duration-300">
                         <div className="p-4 flex justify-between items-center">
                             <button
                                 className="text-gray-500 hover:text-gray-800 focus:outline-none"
@@ -135,7 +134,7 @@ function Sidebar() {
                             </div>
                         </form>
                         <div className='flex justify-center items-center'>
-                            <img src='./assets/logo.png' className=' mt-[185%] w-44' />
+                            <img src='./assets/logo.png' className='mt-[185%] w-44' />
                         </div>
                     </div>
                 )}

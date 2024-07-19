@@ -176,11 +176,11 @@ const Map: React.FC<MapProps> = ({ onBackClick, title, text, url }) => {
             </div>
             
             <div ref={mapRef} >
-                <div className='flex overflow-x-hidden md:hidden block'>
+                <div className='flex overflow-x-hidden md:hidden block' >
                     <div className='fixed right-0'>
-                        <div className='flex' onClick={handleContentClick}>
+                        <div className='flex'>
                             <div className="block md:hidden h-screen max-w-md p-2 bg-white border border-gray-200 rounded-lg shadow relative">
-                                <div className="h-10 absolute top-72 left-[-17px] z-50">
+                                <div className="h-10 absolute top-96 left-[-17px] z-50">
                                     <button onClick={onBackClick} className='bg-blue-700 rounded-md px-2 py-2 text-white'>
                                         <RiArrowRightSLine />
                                     </button>
@@ -344,6 +344,4 @@ const Map: React.FC<MapProps> = ({ onBackClick, title, text, url }) => {
 }
 
 export default Map;
-
-
 

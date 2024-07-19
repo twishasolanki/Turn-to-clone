@@ -6,11 +6,20 @@ import { CiCalendar, CiFlag1, CiShare2 } from "react-icons/ci";
 import { FaBookmark, FaRegBookmark, FaRegClock } from "react-icons/fa";
 import { GrDirections } from "react-icons/gr";
 import { ImNewTab } from "react-icons/im";
+import { IoMdShare } from 'react-icons/io';
 import { IoLocationOutline } from "react-icons/io5";
 import { LuDollarSign } from "react-icons/lu";
 import { MdBlockFlipped } from "react-icons/md";
+import { RWebShare } from "react-web-share";
 
-const ProfileCard: React.FC = () => {
+
+interface ShareButtonProps {
+    title: string;
+    text: string;
+    url: string;
+}
+
+const ProfileCard: React.FC<ShareButtonProps> = (title, text, url) => {
     const items = [
         {
             id: 1,
@@ -143,21 +152,18 @@ const ProfileCard: React.FC = () => {
                 <div className="mt-3 pl-4 pr-4  md:h-[calc(80vh-20px)] h-[calc(80vh-50vh)] md:overflow-y-scroll scrollable-element " >
                     {items.map((item) => (
                         <div key={item.id} className="block flex p-2 mt-1 bg-white border border-blue-200 rounded-lg shadow">
-                            <div className="flex"  onClick={() => setSelectedItem(item.id)}>
-
+                            <div className="flex" onClick={() => setSelectedItem(item.id)}>
                                 <div className="w-3/2" >
                                     <div className="flex md:flex-row flex-col">
                                         <div className="md:w-1/2 " >
                                             <p className="font-bold md:text-md text-md ">{item.title}</p>
                                         </div>
-
                                     </div>
                                     <div className="flex ">
                                         <div className="md:w-1/2">
                                             <p className="text-blue-400 md:text-md text-xs">{item.subtitle}</p>
                                         </div>
                                         <div className="md:w-1/2 w-full flex justify-end items-end font-bold ">
-
                                         </div>
                                     </div>
                                     <div className="flex mt-1">
@@ -201,14 +207,20 @@ const ProfileCard: React.FC = () => {
                                 {isOpen && activePopupId === item.id && (
                                     <div className='flex justify-end items-end'>
                                         <div id="popupMenu" className="absolute  mt-2 w-58 py-2 bg-white border border-gray-200 rounded-lg shadow-xl z-10 text-sm">
-                                            <a href="#" className="flex px-4 py-2 text-gray-800 hover:bg-gray-100 "><CiShare2 className='mt-1' /><span className='ms-2'>Share This Job</span></a>
+                                            <RWebShare data={{ text: text, title: title, url: url }}>
+                                                <a href="#" className="flex px-4 py-2 text-gray-800 hover:bg-gray-100 ">
+                                                    <button className='flex'>
+                                                        <IoMdShare /><span className='ms-2'>Share This Job</span>
+                                                    </button>
+                                                </a>
+                                            </RWebShare>
+
                                             <a href="#" className="flex px-4 py-2 text-gray-800 hover:bg-gray-100"><ImNewTab className='mt-1' /><span className='ms-2'>Open In New Tab</span></a>
                                             <a href="#" className="flex px-4 py-2 text-gray-800 hover:bg-gray-100"><MdBlockFlipped className='mt-1' /><span className='ms-2'>Not Interested</span></a>
                                             <a href="#" className="flex px-4 py-2 text-gray-800 hover:bg-gray-100"><CiFlag1 className='mt-1' /><span className='ms-2'>Problem With This Job?</span></a>
                                         </div>
                                     </div>
                                 )}
-
                                 <div className="md:w-1/2 w-full flex justify-end items-end mt-2 mx-auto">
                                     {bookmarkedItems[item.id] ? (
                                         <FaBookmark
@@ -218,7 +230,7 @@ const ProfileCard: React.FC = () => {
                                     ) : (
                                         <FaRegBookmark
                                             style={{ color: 'gray', cursor: 'pointer' }}
-                                            onClick={() => toggleBookmark(item.id)}/>
+                                            onClick={() => toggleBookmark(item.id)} />
                                     )}
                                 </div>
                             </div>
@@ -231,3 +243,4 @@ const ProfileCard: React.FC = () => {
 }
 
 export default ProfileCard;
+    
