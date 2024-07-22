@@ -1,18 +1,15 @@
 'use client'
-import React, { useEffect, useState } from 'react';
+import Drawercard from '@/app/components/Drawer';
 import Map from '@/app/components/Map';
 import ProfileCard from '@/app/components/ProfileCard';
-import { CiSettings } from 'react-icons/ci';
-import { GrMapLocation, GrUserSettings } from "react-icons/gr";
+import React, { useEffect, useState } from 'react';
+import { FaLocationCrosshairs } from "react-icons/fa6";
 import { IoMdShare } from "react-icons/io";
 import { IoLocationOutline } from 'react-icons/io5';
-import { MdLogout, MdOutlineDashboard, MdOutlineMenu } from "react-icons/md";
-import { TbWorldSearch } from "react-icons/tb";
+import { MdOutlineMenu } from "react-icons/md";
 import { RWebShare } from "react-web-share";
 import Typewriter from 'typewriter-effect';
-import Drawercard from '@/app/components/Drawer';
 import SidebarContent from '../SidebarContent';
-import { FaLocationCrosshairs } from "react-icons/fa6";
 
 interface ShareButtonProps {
     title: string;
@@ -52,39 +49,7 @@ const TurnTo: React.FC<ShareButtonProps> = ({ title, text, url }) => {
         return () => {
             document.removeEventListener('click', handleClickOutside);
         };
-    }, [isOpen]);
-
-    interface MenuItem {
-        icons: React.ReactNode;
-        label: string;
-    }
-
-    const menuItems: MenuItem[] = [
-        {
-            icons: <GrMapLocation size={30} />,
-            label: 'Job Map'
-        },
-        {
-            icons: <TbWorldSearch size={30} />,
-            label: 'Explorer'
-        },
-        {
-            icons: <MdOutlineDashboard size={30} />,
-            label: 'Job Management'
-        },
-        {
-            icons: <CiSettings size={30} />,
-            label: 'Resources'
-        },
-        {
-            icons: <GrUserSettings size={30} />,
-            label: 'Account Settings'
-        },
-        {
-            icons: <MdLogout size={30} />,
-            label: 'Log Out'
-        },
-    ];
+    }, [isOpen]);  
 
     if (selectedItemcard !== null) {
         return <Map onBackClick={() => setSelectedItemcard(null)} />;

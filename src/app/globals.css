@@ -56,3 +56,69 @@ body {
 
 
 
+.markerPointRound {
+  margin: -10px;
+  width: 50px;
+  /* / height: 50px; / */
+  height: auto;
+  /* height: 110px;
+  width: 110px; */
+  /* / background-color: rgba(198, 255, 218, 0.4); / */
+  border-radius: 100%;
+}
+
+.maarker_elipsis{
+  white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.markerPointRound .innerRound {
+  /* height: 45px;
+    width: 45px; */
+  height: 25px;
+  width: 25px;
+  border-radius: 100%;
+  background-color: rgb(89, 50, 234) ;
+  /* / background-color: rgba(14, 188, 147, 1); / */
+  position: absolute;
+  top: calc(50% - 22.5px);
+  left: calc(50% - 22.5px);
+  text-align: center;
+  padding-top: 10%;
+  font-size: 13px;
+  /* / font-size: 25px; / */
+  font-weight: 700;
+  color: #fff;
+}
+
+.marker_all{
+  margin-top: -5px;
+}
+
+.markerPointRoundHoverCard{
+  border-radius: 15px;
+  padding: 5px;
+}
+
+.markerPointRound:hover {
+  /* / background-color: rgba(89, 50, 234, 0.4); / */
+  cursor: pointer;
+  z-index: 1;
+}
+
+.markerPointRound:hover>.innerRound {
+  /* / background-color: rgba(89, 50, 234, 1); / */
+  z-index: 1;
+}
+
+.markerPointRound.hover {
+  /* / background-color: rgba(89, 50, 234, 0.4); / */
+  z-index: 1;
+}
+
+.markerPointRound.hover>.innerRound {
+  /* / background-color: rgba(89, 50, 234, 1); / */
+  z-index: 1;
+}

@@ -55,20 +55,20 @@ function Sidebar() {
         <>
             <div className=" md:block hidden">
                 <div
-                    className="sidebar border border-blue-700 bg-white text-black w-16 hover:w-72 h-screen relative transition-all duration-300"
+                    className="sidebar border border-blue-700 bg-white  text-black w-20 hover:w-72 h-screen relative transition-all duration-300"
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                 >
                     <ul className="flex flex-col space-y-2 p-4">
                         <li className="p-2 text-black rounded-md flex items-center space-x-4 ">
                             {isHovered ? (
-                                <img src='./assets/logo.png' alt="Logo" className="w-36 rounded-md " />
+                                <img src='./assets/logo.png' alt="Logo" className="w-36 rounded-md" />
                             ) : (
                                 <AiOutlineMenu />
                             )}
                         </li>
                         <li className="text-black p-2 rounded-md flex items-center space-x-4 hover:bg-[#5932EA] hover:text-white mt-3">
-                            <GrMapLocation />
+                            <GrMapLocation/>
                             <span className={`sidebar-label hidden ${isHovered ? 'inline opacity-100' : 'opacity-0'} transition-opacity duration-300`}>Job Map</span>
                         </li>
                         <li className="text-black p-2 rounded-md flex items-center space-x-4 hover:bg-[#5932EA] hover:text-white"

@@ -1,16 +1,18 @@
+"use client"
 import React from 'react';
 import Sidebar from '@/app/components/Sidebar';
 import TurnTo from '@/app/components/Turnto/page';
 import SimpleMap from './components/Googlemap/SimpleMap';
 
 const Home: React.FC = () => {
+
   return (
     <>
-      <div className=''>
-        <SimpleMap/>
+      <div>
+        <SimpleMap />
         <div className='flex'>
-        <Sidebar />
-        <TurnTo />
+          <Sidebar />
+          <TurnTo />
         </div>
       </div>
     </>
