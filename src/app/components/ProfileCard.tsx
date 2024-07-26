@@ -19,7 +19,8 @@ interface ShareButtonProps {
     url: string;
 }
 
-const ProfileCard: React.FC<ShareButtonProps> = (title, text, url) => {
+
+const ProfileCard: React.FC<ShareButtonProps> = (title: any, text: any, url: any) => {
     const items = [
         {
             id: 1,
@@ -100,13 +101,16 @@ const ProfileCard: React.FC<ShareButtonProps> = (title, text, url) => {
             login: 'Login To See Profile Matching'
         },
     ];
-
+   
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [selectedItem, setSelectedItem] = useState<number | null>(null);
     const [activePopupId, setActivePopupId] = useState<number | null>(null);
-    const [bookmarkedItems, setBookmarkedItems] = useState({});
+    const [bookmarkedItems, setBookmarkedItems] = useState<Record<string, boolean>>(() => {
+        const savedBookmarks = localStorage.getItem('bookmarkedItems');
+        return savedBookmarks ? JSON.parse(savedBookmarks) : {};
+    });
 
-    const togglePopup = (id: number) => {
+    const togglePopup = (id:any) => {
         if (activePopupId === id) {
             setIsOpen(false);
             setActivePopupId(null);
@@ -116,13 +120,6 @@ const ProfileCard: React.FC<ShareButtonProps> = (title, text, url) => {
         }
     };
 
-    const toggleBookmark = (id) => {
-        setBookmarkedItems(prev => ({
-            ...prev,
-            [id]: !prev[id]
-        }));
-    };
-
     const handleClickOutside = (event: MouseEvent) => {
         const popup = document.getElementById("popupMenu");
         if (popup && !popup.contains(event.target as Node)) {
@@ -130,6 +127,18 @@ const ProfileCard: React.FC<ShareButtonProps> = (title, text, url) => {
             setActivePopupId(null);
         }
     };
+
+    const toggleBookmark = (id: string) => {
+        setBookmarkedItems(prev => {
+            const updatedBookmarks = {
+                ...prev,
+                [id]: !prev[id]
+            };
+            localStorage.setItem('bookmarkedItems', JSON.stringify(updatedBookmarks));
+            return updatedBookmarks;
+        });
+    };
+
 
     useEffect(() => {
         if (isOpen) {
@@ -221,21 +230,35 @@ const ProfileCard: React.FC<ShareButtonProps> = (title, text, url) => {
                                         </div>
                                     </div>
                                 )}
-                                <div className="md:w-1/2 w-full flex justify-end items-end mt-2 mx-auto">
-                                    {bookmarkedItems[item.id] ? (
-                                        <FaBookmark
-                                            style={{ color: 'black', cursor: 'pointer' }}
-                                            onClick={() => toggleBookmark(item.id)}
-                                        />
-                                    ) : (
-                                        <FaRegBookmark
-                                            style={{ color: 'gray', cursor: 'pointer' }}
-                                            onClick={() => toggleBookmark(item.id)} />
-                                    )}
-                                </div>
+                                <div className="md:w-1/2 flex justify-end items-end mt-2 mx-auto">
+                               
+                                {bookmarkedItems[item.id] ? (
+                                    <FaBookmark
+                                        style={{ color: 'black', cursor: 'pointer' }}
+                                        onClick={(e) => { e.stopPropagation(); toggleBookmark(item.id); }}
+                                    />
+                                ) : (
+                                    <FaRegBookmark
+                                        style={{ color: 'gray', cursor: 'pointer' }}
+                                        onClick={(e) => { e.stopPropagation(); toggleBookmark(item.id); }}
+                                    />
+                                )}
+                        
+                            </div>
                             </div>
                         </div>
                     ))}
+                       {selectedItem && (
+                    <Map
+                        onBackClick={() => setSelectedItem(null)}
+                        title="Job Title"
+                        text="Job Description"
+                        url="http://example.com"
+                        jobId={selectedItem}
+                        isBookmarked={bookmarkedItems[selectedItem]}
+                        toggleBookmark={toggleBookmark}
+                    />
+                )}
                 </div>
             </div>
         </>
@@ -243,4 +266,140 @@ const ProfileCard: React.FC<ShareButtonProps> = (title, text, url) => {
 }
 
 export default ProfileCard;
-    
+
+
+
+
+
+
+
+
+
+// // ProfileCard.tsx
+// 'use client'
+// import React, { useState, useEffect } from 'react';
+// import { FaBookmark, FaRegBookmark } from "react-icons/fa";
+// import Map from '@/app/components/Map'; // Adjust the path as needed
+
+// interface JobItem {
+//     id: string;
+//     title: string;
+//     subtitle: string;
+//     location: string;
+//     time: string;
+//     price: string;
+//     day: string;
+//     direction: string;
+//     min: string;
+//     content: string;
+//     login: string;
+// }
+
+// const ProfileCard: React.FC = () => {
+//     const [selectedItem, setSelectedItem] = useState<string | null>(null);
+//     const [bookmarkedItems, setBookmarkedItems] = useState<Record<string, boolean>>(() => {
+//         const savedBookmarks = localStorage.getItem('bookmarkedItems');
+//         return savedBookmarks ? JSON.parse(savedBookmarks) : {};
+//     });
+
+//     const items: JobItem[] = [
+//         {
+//             id: '1',
+//             title: 'Marketing Consultant',
+//             subtitle: 'Tailwind',
+//             location: 'Rajkot,360001',
+//             time: 'Part-Time',
+//             price: '1000-20000',
+//             day: '18 d ago',
+//             direction: '~3 - 4 Mi',
+//             min: '~5min',
+//             content: 'Turn-To AI Profile Match',
+//             login: 'Login To See Profile Matching'
+//         },
+//         {
+//             id: '2',
+//             title: 'Marketing Consultant',
+//             subtitle: 'Tailwind',
+//             location: 'Rajkot,360001',
+//             time: 'Part-Time',
+//             price: '1000-20000',
+//             day: '18 d ago',
+//             direction: '~3 - 4 Mi',
+//             min: '~5min',
+//             content: 'Turn-To AI Profile Match',
+//             login: 'Login To See Profile Matching'
+//         },
+//     ];
+
+//     const toggleBookmark = (id: string) => {
+//         setBookmarkedItems(prev => {
+//             const updatedBookmarks = {
+//                 ...prev,
+//                 [id]: !prev[id]
+//             };
+//             localStorage.setItem('bookmarkedItems', JSON.stringify(updatedBookmarks));
+//             return updatedBookmarks;
+//         });
+//     };
+
+//     return (
+//         <div className='md:ms-0 md:mt-0 text-sm absolute 2xl:w-[28%] xl:w-[30%] lg:w-[50%] md:w-[57%] sm:w-[50%]'>
+//             <div className="mt-3 pl-4 pr-4 md:h-[calc(80vh-20px)] h-[calc(80vh-50vh)] md:overflow-y-scroll scrollable-element">
+//                 {items.map((item) => (
+//                     <div key={item.id} className="block flex p-2 mt-1 bg-white border border-blue-200 rounded-lg shadow">
+//                         <div className="flex w-full" onClick={() => setSelectedItem(item.id)}>
+//                             <div className="w-full">
+//                                 <p className="font-bold md:text-md text-md">{item.title}</p>
+//                                 <p className="text-blue-400 md:text-md text-xs">{item.subtitle}</p>
+//                                 <div className='flex'>
+//                                 <p className="text-xs">{item.location}</p>
+//                                 <p className="text-xs">{item.time}</p>
+//                                 <p className="text-xs">{item.price}</p>
+//                                 <p className="text-xs">{item.direction}</p>
+//                                 <p className="text-xs">{item.min}</p>
+//                                 </div>
+
+//                                 <div className="font-bold mt-1 underline">{item.content}</div>
+//                                 <div className="text-blue-400 mt-1 text-xs font-medium">{item.login}</div>
+//                             </div>
+//                         </div>
+//                         <div className="w-[10%]">
+//                             <div className="md:w-1/2 flex justify-end items-end mt-2 mx-auto">
+//                                 {bookmarkedItems[item.id] ? (
+//                                     <FaBookmark
+//                                         style={{ color: 'black', cursor: 'pointer' }}
+//                                         onClick={(e) => { e.stopPropagation(); toggleBookmark(item.id); }}
+//                                     />
+//                                 ) : (
+//                                     <FaRegBookmark
+//                                         style={{ color: 'gray', cursor: 'pointer' }}
+//                                         onClick={(e) => { e.stopPropagation(); toggleBookmark(item.id); }}
+//                                     />
+//                                 )}
+//                             </div>
+//                         </div>
+//                     </div>
+//                 ))}
+//                 {selectedItem && (
+//                     <Map
+//                         onBackClick={() => setSelectedItem(null)}
+//                         title="Job Title"
+//                         text="Job Description"
+//                         url="http://example.com"
+//                         jobId={selectedItem}
+//                         isBookmarked={bookmarkedItems[selectedItem]}
+//                         toggleBookmark={toggleBookmark}
+//                     />
+//                 )}
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default ProfileCard;
+
+
+
+
+
+

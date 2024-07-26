@@ -29,6 +29,8 @@
 .scrollable-element {
   scrollbar-width: thin;
   scrollbar-color: rgb(63, 63, 221) #e2e1eb;
+  scroll-behavior: smooth;
+  
 }
 
 .scroll{
@@ -47,14 +49,11 @@ body {
     width: 100%;
 }
 
-
 .sidebar:hover .sidebar-label {
   display: inline;
   opacity: 1;
   width: 130px;
 }
-
-
 
 .markerPointRound {
   margin: -10px;

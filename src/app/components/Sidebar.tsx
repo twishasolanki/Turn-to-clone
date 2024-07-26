@@ -55,7 +55,7 @@ function Sidebar() {
         <>
             <div className=" md:block hidden">
                 <div
-                    className="sidebar border border-blue-700 bg-white  text-black w-20 hover:w-72 h-screen relative transition-all duration-300"
+                    className="sidebar border border-blue-700 bg-white  text-black w-16 hover:w-72 h-screen relative transition-all duration-300"
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                 >
