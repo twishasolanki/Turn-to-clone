@@ -49,7 +49,7 @@ const SidebarContent: React.FC = () => {
 
     return (
         <div
-            className=" bg-white text-black  hover:w-72 h-screen relative ">
+            className=" bg-white text-black hover:w-72 h-screen">
             <ul className="flex flex-col">
                 <li className='flex hover:bg-[#5932EA] hover:text-white rounded-lg'>
                     <GrMapLocation className='mt-1 ms-2' />
@@ -78,7 +78,7 @@ const SidebarContent: React.FC = () => {
                 </li>
             </ul>
             <div className='flex justify-center items-center absolute'>
-                <img src='./assets/logo.png' className='mt-[300%] w-44 ms-5' />
+                <img src='./assets/logo.png' className='mt-[220%] w-44 ' />
             </div>
             {isRightSidebarOpen && (
                 <div ref={rightSidebarRef} className="border border-black bg-gray-200 text-black sm:w-72 xs:w-64 h-screen fixed right-0 top-0">
@@ -116,11 +116,11 @@ const SidebarContent: React.FC = () => {
                     <form className="max-w-md mx-auto">
                         <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only ">Search</label>
                         <div className="relative">
-                            <input type="search" id="default-search" className="block w-64 mx-auto mt-3 p-3 ps-5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 " placeholder="Search History" required />
+                            <input type="search" id="default-search" className="block w-60 mx-auto mt-3 p-3 ps-5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 " placeholder="Search History" required />
                         </div>
                     </form>
                     <div className='flex justify-center items-center absolute'>
-                        <img src='./assets/logo.png' className='mt-[320%] w-44 ms-5' />
+                        <img src='./assets/logo.png' className='mt-[240%] w-44 ms-5' />
                     </div>
                 </div>
             )}
